@@ -55,7 +55,7 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
     setState(() {
       isPaused = !isPaused;
       if (isPaused) {
-        stepCountStream = Stream.empty(); // Pause by using an empty stream
+        stepCountStream = const Stream.empty(); // Pause by using an empty stream
       } else {
         initPedometer(); // Resume by initializing the stream again
       }
@@ -190,7 +190,7 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
                                   ),
                                   child: Text(
                                     isPaused ? 'Resume' : 'Pause',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w700),
                                   ),
@@ -206,7 +206,7 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
                                     minimumSize: Size(widget.screenWidth * 0.2,
                                         50), // Set the width and height
                                   ),
-                                  child: Text(
+                                  child: const Text(
                                     'Restart',
                                     style: TextStyle(
                                         fontSize: 15,

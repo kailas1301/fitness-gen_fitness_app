@@ -260,7 +260,7 @@ class _HistoryScrnState extends State<HistoryScrn> {
       String? setExerciseKey, String exerciseName) async {
     final exerciseBox = await Hive.openBox<ExerciseModel>('exercises');
     try {
-      if (setExerciseKey != null) {
+      if (int.parse(setExerciseKey??'')>76) {
         final exercise = exerciseBox.values.firstWhere(
           (exercise) => exercise.exerciseKey == setExerciseKey,
         );

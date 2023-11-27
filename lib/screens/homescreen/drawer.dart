@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:fitnessapplication/database/userinformation/userdata.dart';
+import 'package:fitnessapplication/screens/caloriecalculator/calorie_calculator.dart';
 import 'package:fitnessapplication/screens/history/Historyscreen.dart';
 import 'package:fitnessapplication/screens/profile/profile.dart';
 import 'package:fitnessapplication/screens/reminder_screens/reminders.dart';
@@ -115,11 +116,17 @@ class _DrawerClassState extends State<DrawerClass> {
               );
             },
           ),
-          // ListTile(
-          //   leading: const Icon(Icons.photo_library_outlined),
-          //   title: const Text('Progress Gallery'),
-          //   onTap: () {},
-          // ),
+          ListTile(
+            leading: const Icon(Icons.health_and_safety),
+            title: const Text('Calorie Calculator'),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const CalorieCalculatorScreen(),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
