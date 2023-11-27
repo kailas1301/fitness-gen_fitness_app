@@ -1,6 +1,6 @@
 import 'package:fitnessapplication/screens/homescreen/homescreen.dart';
-import 'package:fitnessapplication/screens/history/Historyscreen.dart';
-import 'package:fitnessapplication/screens/profile/profile.dart';
+import 'package:fitnessapplication/screens/drawerscreens/history/Historyscreen.dart';
+import 'package:fitnessapplication/screens/drawerscreens/profile/profile.dart';
 import 'package:fitnessapplication/screens/workout/workoutcategory.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';

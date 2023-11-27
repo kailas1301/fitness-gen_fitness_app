@@ -55,7 +55,8 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
     setState(() {
       isPaused = !isPaused;
       if (isPaused) {
-        stepCountStream = const Stream.empty(); // Pause by using an empty stream
+        stepCountStream =
+            const Stream.empty(); // Pause by using an empty stream
       } else {
         initPedometer(); // Resume by initializing the stream again
       }

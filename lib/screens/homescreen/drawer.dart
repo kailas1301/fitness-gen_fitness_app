@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:fitnessapplication/database/userinformation/userdata.dart';
-import 'package:fitnessapplication/screens/caloriecalculator/calorie_calculator.dart';
-import 'package:fitnessapplication/screens/history/Historyscreen.dart';
-import 'package:fitnessapplication/screens/profile/profile.dart';
-import 'package:fitnessapplication/screens/reminder_screens/reminders.dart';
+import 'package:fitnessapplication/screens/drawerscreens/aboutapp/about_app.dart';
+import 'package:fitnessapplication/screens/drawerscreens/caloriecalculator/calorie_calculator.dart';
+import 'package:fitnessapplication/screens/drawerscreens/history/Historyscreen.dart';
+import 'package:fitnessapplication/screens/drawerscreens/privacypolicy/privacy_policy.dart';
+import 'package:fitnessapplication/screens/drawerscreens/profile/profile.dart';
+import 'package:fitnessapplication/screens/drawerscreens/reminder_screens/reminders.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -123,6 +125,28 @@ class _DrawerClassState extends State<DrawerClass> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const CalorieCalculatorScreen(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.info_outline_rounded),
+            title: const Text('About App'),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const AboutApp(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.privacy_tip_rounded),
+            title: const Text('Privacy Policy'),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const PrivacyPolicyScreen(),
                 ),
               );
             },

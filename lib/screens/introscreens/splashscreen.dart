@@ -1,5 +1,5 @@
 import 'package:fitnessapplication/database/userinformation/dbfunctions.dart';
-import 'package:fitnessapplication/screens/bottomnav/bottomnavigationscreen.dart';
+import 'package:fitnessapplication/screens/workout/bottomnav/bottomnavigationscreen.dart';
 import 'package:fitnessapplication/screens/introscreens/welcomescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
