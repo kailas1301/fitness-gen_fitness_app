@@ -1,5 +1,4 @@
 import 'package:fitnessapplication/local_notifications/local_noti.dart';
-import 'package:fitnessapplication/screens/homescreen/watertracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -77,7 +76,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                           setState(() {
                             waterReminder = value;
                             saveReminderStates();
-                            if (waterReminder && isWaterGoalCompleted==false) {
+                            if (waterReminder) {
                               NotificationService()
                                   .schedulePeriodicNotification(
                                 id: 1,

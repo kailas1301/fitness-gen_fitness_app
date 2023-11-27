@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-bool isWaterGoalCompleted = false;
-
 class WarterTrackerContainer extends StatefulWidget {
   const WarterTrackerContainer({
     super.key,
@@ -23,7 +21,6 @@ class WarterTrackerContainer extends StatefulWidget {
 
 class _WarterTrackerContainerState extends State<WarterTrackerContainer> {
   int noOfGlasses = 0;
-  
 
   @override
   void initState() {
@@ -36,7 +33,6 @@ class _WarterTrackerContainerState extends State<WarterTrackerContainer> {
     final waterIntake = await getWaterIntakeForDate(today);
     setState(() {
       noOfGlasses = waterIntake;
-      noOfGlasses == widget.limitOfGlass ? isWaterGoalCompleted = true : false;
     });
   }
 

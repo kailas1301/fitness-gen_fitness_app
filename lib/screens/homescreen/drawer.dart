@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:fitnessapplication/database/user_information/userdata.dart';
+import 'package:fitnessapplication/database/userinformation/userdata.dart';
 import 'package:fitnessapplication/screens/history/Historyscreen.dart';
 import 'package:fitnessapplication/screens/profile/profile.dart';
 import 'package:fitnessapplication/screens/reminder_screens/reminders.dart';

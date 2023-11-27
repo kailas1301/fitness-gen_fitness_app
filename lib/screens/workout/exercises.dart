@@ -250,7 +250,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                                           ),
 TextButton(
   onPressed: () {
-    deleteAnExercise(exerciseAtIndex);
+    deleteAnExercise(exerciseAtIndex,exerciseAtIndex.exerciseKey??'');
     loadExercises();
 
     // Navigate to ExerciseListScreen again and clear the stack
@@ -375,12 +375,13 @@ TextButton(
                 String exerciseName = editExerciseController.text;
                 if (exerciseName.isNotEmpty) {
                   // to update a exercise
+
                   ExerciseModel updatedExercise = ExerciseModel(
                       name: exerciseName,
                       category: widget.category,
                       categoryKey: widget.category.categoryKey,
                       exerciseKey: currentExercise.exerciseKey);
-                  updateExercise(updatedExercise, index);
+                  updateExercise(updatedExercise, index,currentExercise.exerciseKey??'');
                   loadExercises();
                   Navigator.of(context).pop();
                   editExerciseController.clear();

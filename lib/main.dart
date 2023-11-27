@@ -1,5 +1,4 @@
-import 'package:fitnessapplication/database/step_tracker.dart/step_model.dart';
-import 'package:fitnessapplication/database/user_information/userdata.dart';
+import 'package:fitnessapplication/database/userinformation/userdata.dart';
 import 'package:fitnessapplication/database/watertracker/watertrackerdatabase.dart';
 import 'package:fitnessapplication/database/workoutdb/workoutmodel.dart';
 import 'package:fitnessapplication/local_notifications/local_noti.dart';
@@ -18,13 +17,11 @@ Future<void> main() async {
   Hive.registerAdapter(CategoryModelAdapter());
   Hive.registerAdapter(ExerciseModelAdapter());
   Hive.registerAdapter(SetModelAdapter());
-  Hive.registerAdapter(StepModelAdapter());
   await Hive.openBox<User>('user_db');
   await Hive.openBox<WaterIntake>('water_intake_db');
   await Hive.openBox<CategoryModel>('category_box');
   await Hive.openBox<ExerciseModel>('exercises');
   await Hive.openBox<SetModel>('sets');
-  await Hive.openBox<StepModel>('stepBox');
   runApp(const MyApp());
 }
 

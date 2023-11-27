@@ -18,7 +18,7 @@ class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
     };
     return CategoryModel(
       name: fields[0] as String,
-      categoryKey: fields[1] as int?,
+      categoryKey: fields[1] as String?,
     );
   }
 
@@ -56,8 +56,8 @@ class ExerciseModelAdapter extends TypeAdapter<ExerciseModel> {
     return ExerciseModel(
       name: fields[0] as String,
       category: fields[1] as CategoryModel,
-      categoryKey: fields[2] as int?,
-      exerciseKey: fields[3] as int?,
+      categoryKey: fields[2] as String?,
+      exerciseKey: fields[3] as String?,
     );
   }
 
@@ -101,8 +101,8 @@ class SetModelAdapter extends TypeAdapter<SetModel> {
       weight: fields[1] as int,
       reps: fields[2] as int,
       date: fields[3] as DateTime,
-      exerciseKey: fields[4] as int?,
-      setKey: fields[5] as int?,
+      exerciseKey: fields[4] as String?,
+      setKey: fields[5] as String?,
       exercise: fields[6] as ExerciseModel,
     );
   }

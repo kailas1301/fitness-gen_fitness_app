@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:fitnessapplication/database/user_information/dbfunctions.dart';
-import 'package:fitnessapplication/database/user_information/userdata.dart';
+import 'package:fitnessapplication/database/userinformation/dbfunctions.dart';
+import 'package:fitnessapplication/database/userinformation/userdata.dart';
 import 'package:fitnessapplication/database/watertracker/watertrackerfunctions.dart';
 import 'package:fitnessapplication/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';

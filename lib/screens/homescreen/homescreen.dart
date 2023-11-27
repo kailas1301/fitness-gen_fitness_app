@@ -1,5 +1,5 @@
-import 'package:fitnessapplication/database/user_information/dbfunctions.dart';
-import 'package:fitnessapplication/database/user_information/userdata.dart';
+import 'package:fitnessapplication/database/userinformation/dbfunctions.dart';
+import 'package:fitnessapplication/database/userinformation/userdata.dart';
 import 'package:fitnessapplication/screens/homescreen/bmicontainer.dart';
 import 'package:fitnessapplication/screens/homescreen/startworkoutcontainer.dart';
 import 'package:fitnessapplication/screens/homescreen/steptracker.dart';

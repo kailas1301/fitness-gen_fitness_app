@@ -1,4 +1,4 @@
-import 'package:fitnessapplication/database/user_information/dbfunctions.dart';
+import 'package:fitnessapplication/database/userinformation/dbfunctions.dart';
 import 'package:fitnessapplication/screens/bottomnav/bottomnavigationscreen.dart';
 import 'package:fitnessapplication/screens/introscreens/welcomescreen.dart';
 import 'package:flutter/material.dart';

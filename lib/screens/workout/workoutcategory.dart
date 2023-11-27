@@ -25,12 +25,12 @@ class _CategoryScrnState extends State<CategoryScrn> {
 //function to load the categories and join the predifined categories and user defined categories
   Future<void> loadCategories() async {
     predefinedCategories = [
-      CategoryModel(name: "CHEST"),
-      CategoryModel(name: "TRICEPS"),
-      CategoryModel(name: "BACK"),
-      CategoryModel(name: "BICEPS"),
-      CategoryModel(name: "SHOULDERS"),
-      CategoryModel(name: "LEGS"),
+      CategoryModel(name: "CHEST", categoryKey:'1'),
+      CategoryModel(name: "TRICEPS", categoryKey:'2'),
+      CategoryModel(name: "BACK", categoryKey: '3'),
+      CategoryModel(name: "BICEPS", categoryKey: '4'),
+      CategoryModel(name: "SHOULDERS", categoryKey:'5'),
+      CategoryModel(name: "LEGS", categoryKey: '6'),
     ];
     // get the categories which are made by user
     final userdefinedcategoryList = await getCategories();
@@ -129,7 +129,7 @@ class _CategoryScrnState extends State<CategoryScrn> {
                                 icon: const Icon(Icons.delete),
                                 onPressed: () {
                                   // to delete a  category
-                                  deleteCategory(category);
+                                  deleteCategory(category,category.categoryKey??'');
                                   loadCategories();
                                 },
                               ),
@@ -200,6 +200,7 @@ class _CategoryScrnState extends State<CategoryScrn> {
   void editCategory(CategoryModel category, int index) {
     // asigning category name to a variable
     String newName = category.name;
+    String categoryKey = category.categoryKey.toString();
 
     showDialog(
       context: context,
@@ -231,7 +232,7 @@ class _CategoryScrnState extends State<CategoryScrn> {
                   // to update the name of category and also the passing the category key .
                   CategoryModel updatedCategory = CategoryModel(
                       name: newName, categoryKey: category.categoryKey);
-                  updateCategory(updatedCategory, index);
+                  updateCategory(updatedCategory, index,categoryKey);
                   loadCategories();
                   Navigator.of(context).pop();
                 }

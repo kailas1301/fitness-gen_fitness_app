@@ -6,7 +6,7 @@ class CategoryModel {
   @HiveField(0)
   String name;
   @HiveField(1)
-  int? categoryKey;
+  String? categoryKey;
   CategoryModel({required this.name, this.categoryKey});
 }
 
@@ -17,9 +17,9 @@ class ExerciseModel {
   @HiveField(1)
   CategoryModel category;
   @HiveField(2)
-  int? categoryKey;
+  String? categoryKey;
   @HiveField(3)
-  int? exerciseKey;
+  String? exerciseKey;
 
   ExerciseModel(
       {required this.name,
@@ -39,19 +39,17 @@ class SetModel {
   @HiveField(3)
   DateTime date;
   @HiveField(4)
-  int? exerciseKey;
+  String? exerciseKey;
   @HiveField(5)
-  int? setKey;
+  String? setKey; 
   @HiveField(6)
   ExerciseModel exercise;
 
-  SetModel(
-      {required this.exerciseId,
-      required this.weight,
-      required this.reps,
-      required this.date,
-      this.exerciseKey,
-      this.setKey,
-      required this.exercise});
+ SetModel({required this .exerciseId,
+  required this.weight,
+  required this.reps,
+  required this.date,
+  this.exerciseKey,
+  this.setKey,
+  required this.exercise});
 }
-

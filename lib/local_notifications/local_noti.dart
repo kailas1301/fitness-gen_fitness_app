@@ -72,43 +72,38 @@ class NotificationService {
     );
   }
 
-Future<void> scheduleDailyNotificationAtTime({
-  int id = 3,
-  String? title,
-  String? body,
-  required TimeOfDay notificationTime,
-}) async {
-  DateTime now = DateTime.now();
-  DateTime scheduledDateTime = DateTime(
-    now.year,
-    now.month,
-    now.day,
-    notificationTime.hour,
-    notificationTime.minute,
-  );
+  Future<void> scheduleDailyNotificationAtTime({
+    int id = 3,
+    String? title,
+    String? body,
+    required TimeOfDay notificationTime,
+  }) async {
+    DateTime now = DateTime.now();
 
-  // Check if the scheduled time is already passed for today
-  if (now.isAfter(scheduledDateTime)) {
-    // If yes, schedule it for the next day
-    scheduledDateTime = scheduledDateTime.add(Duration(days: 1));
+    DateTime scheduledDateTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      notificationTime.hour,
+      notificationTime.minute,
+    );
+
+    if (scheduledDateTime.isBefore(now)) {
+      scheduledDateTime = scheduledDateTime.add(const Duration(days: 1));
+    }
+
+    await notificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      tz.TZDateTime.from(scheduledDateTime, tz.local),
+      notificationDetails(),
+      androidAllowWhileIdle: true,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      payload: id.toString(),
+    );
   }
-
-  await notificationsPlugin.zonedSchedule(
-    id,
-    title,
-    body,
-    tz.TZDateTime.from(
-      scheduledDateTime,
-      tz.local,
-    ),
-    notificationDetails(),
-    androidAllowWhileIdle: true,
-    uiLocalNotificationDateInterpretation:
-        UILocalNotificationDateInterpretation.absoluteTime,
-    payload: id.toString(),
-  );
-}
-
 
   Future<void> cancelNotification(int id) async {
     await notificationsPlugin.cancel(id);

@@ -13,13 +13,15 @@ Future<List<CategoryModel>> getCategories() async {
 Future<void> addCategory(CategoryModel value) async {
   final categoryBox = await Hive.openBox<CategoryModel>('category_box');
   final timeKey = DateTime.now().millisecondsSinceEpoch;
-  value.categoryKey = timeKey;
+  String key = timeKey.toString();
+  value.categoryKey = key;
+
   print('${value.categoryKey} categorykey');
-  await categoryBox.add(value);
+  await categoryBox.put(key, value);
 }
 
 // to dlete a new category
-void deleteCategory(CategoryModel category) {
+void deleteCategory(CategoryModel category, String key) {
   // creating a instance of boxes of category exercise and sets
   final categoryBox = Hive.box<CategoryModel>('category_box');
   final exerciseBox = Hive.box<ExerciseModel>('exercises');
@@ -47,14 +49,15 @@ void deleteCategory(CategoryModel category) {
     exerciseBox.deleteAt(exerciseIndex);
   }
   // Delete the category itself
-  final index = categoryBox.values.toList().indexOf(category);
-  categoryBox.deleteAt(index);
+  // final index = categoryBox.values.toList().indexOf(category);
+  categoryBox.delete(key);
 }
 
 // to update the category
-void updateCategory(CategoryModel updatedCategory, int index) async {
+void updateCategory(
+    CategoryModel updatedCategory, int index, String categoryKey) async {
   final categoryBox = await Hive.openBox<CategoryModel>('category_box');
-  categoryBox.putAt(index, updatedCategory);
+  categoryBox.put(categoryKey, updatedCategory);
 }
 
 // functions for exercise
@@ -64,10 +67,11 @@ Future<void> addExercise(ExerciseModel value) async {
   final exerciseBox = await Hive.openBox<ExerciseModel>('exercises');
   // to pass a unique key based on the time
   final timeKey = DateTime.now().millisecondsSinceEpoch;
-  value.exerciseKey = timeKey;
+  String key = timeKey.toString();
+  value.exerciseKey = key;
   print('${value.categoryKey} categorykeyforexercise');
   print('${value.exerciseKey} categorykeyforexercisexercisekey');
-  await exerciseBox.add(value);
+  await exerciseBox.put(key, value);
 }
 
 // top get the data of exercises into a list
@@ -77,13 +81,15 @@ Future<List<ExerciseModel>> getExercises() async {
 }
 
 // to update a exercise
-Future<void> updateExercise(ExerciseModel updatedExercise, int index) async {
+Future<void> updateExercise(
+    ExerciseModel updatedExercise, int index, String key) async {
   final exerciseBox = await Hive.openBox<ExerciseModel>('exercises');
-  await exerciseBox.putAt(index, updatedExercise);
+  if (updatedExercise.exerciseKey == null) {}
+  await exerciseBox.put(key, updatedExercise);
 }
 
 // function to delete a exercise
-Future<void> deleteAnExercise(ExerciseModel exercise) async {
+Future<void> deleteAnExercise(ExerciseModel exercise, String key) async {
   final exerciseBox = await Hive.openBox<ExerciseModel>('exercises');
   final setBox = await Hive.openBox<SetModel>('sets');
 
@@ -95,8 +101,8 @@ Future<void> deleteAnExercise(ExerciseModel exercise) async {
     final setIndex = setBox.values.toList().indexOf(set);
     setBox.deleteAt(setIndex);
   }
-  final index = exerciseBox.values.toList().indexOf(exercise);
-  exerciseBox.deleteAt(index);
+  // final index = exerciseBox.values.toList().indexOf(exercise);
+  exerciseBox.delete(key);
 }
 
 // functions for exercise sets.
@@ -105,8 +111,9 @@ Future<void> addSet(SetModel value) async {
   final setBox = await Hive.openBox<SetModel>('sets');
   // to pass a unique key based on the time
   final timeKey = DateTime.now().millisecondsSinceEpoch;
-  value.setKey = timeKey;
-  setBox.add(value);
+  String key = timeKey.toString();
+  value.setKey = key;
+  setBox.put(key, value);
 }
 
 Future<List<SetModel>> getSets() async {
@@ -114,13 +121,13 @@ Future<List<SetModel>> getSets() async {
   return setBox.values.toList();
 }
 
-Future<void> updateSet(int index, SetModel updatedSet) async {
+Future<void> updateSet(String key, SetModel updatedSet) async {
   final setBox = await Hive.openBox<SetModel>('sets');
-  await setBox.putAt(index, updatedSet);
+  await setBox.put(key, updatedSet);
 }
 
 Future<void> deleteSetByExerciseId(
-    String exerciseId, int index, List<SetModel> setsList) async {
+    String exerciseId, String key, List<SetModel> setsList) async {
   final setBox = await Hive.openBox<SetModel>('sets');
   // final setToDelete = setsList[index];
   // final sets =
@@ -129,7 +136,7 @@ Future<void> deleteSetByExerciseId(
   // if (setIndex >= 0) {
   //   await setBox.deleteAt(setIndex);
   // }
-  await setBox.deleteAt(index);
+  await setBox.delete(key);
 }
 
 Future<List<SetModel>> getSetDataForTheDay(DateTime selectedDate) async {

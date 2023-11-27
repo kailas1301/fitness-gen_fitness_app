@@ -30,7 +30,12 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
     final setBox = await Hive.openBox<SetModel>('sets');
     final exerciseSets = setBox.values
         .where((set) =>
-            set.exerciseKey == widget.exerciseAtIndex.exerciseKey &&
+        widget.exerciseAtIndex.exerciseKey==null?
+         set.exerciseId == widget.exerciseAtIndex.name &&
+            set.date.year == today.year &&
+            set.date.month == today.month &&
+            set.date.day == today.day:
+            set.exercise.exerciseKey == widget.exerciseAtIndex.exerciseKey &&
             set.date.year == today.year &&
             set.date.month == today.month &&
             set.date.day == today.day)
@@ -39,6 +44,42 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
       setsData = exerciseSets;
     });
   }
+// Future<void> loadSets() async {
+//   final setBox = await Hive.openBox<SetModel>('sets');
+//   List<SetModel> exerciseSets;
+
+//   if (widget.exerciseAtIndex.exerciseKey == null) {
+//     // Sort by exercise name and ID if exerciseKey is null
+//     exerciseSets = setBox.values
+//         .where((set) =>
+//             set.exercise.name == widget.exerciseName &&
+//             set.date.year == today.year &&
+//             set.date.month == today.month &&
+//             set.date.day == today.day)
+//         .toList()
+//         ..sort((a, b) {
+//           // Custom sorting logic based on exercise name and ID
+//           final result = a.exerciseId.compareTo(b.exerciseId);
+//           if (result == 0) {
+//             return a.exercise.name.compareTo(b.exercise.name);
+//           }
+//           return result;
+//         });
+//   } else {
+//     // Use the existing method if exerciseKey is not null
+//     exerciseSets = setBox.values
+//         .where((set) =>
+//             set.exerciseKey == widget.exerciseAtIndex.exerciseKey &&
+//             set.date.year == today.year &&
+//             set.date.month == today.month &&
+//             set.date.day == today.day)
+//         .toList();
+//   }
+
+//   setState(() {
+//     setsData = exerciseSets;
+//   });
+// }
 
   @override
   Widget build(BuildContext context) {
@@ -258,7 +299,7 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
                 if (weight.isNotEmpty && reps.isNotEmpty) {
                   final updatedSet =SetModel(exercise: widget.exerciseAtIndex,exerciseId: widget.exerciseName,exerciseKey: widget.exerciseAtIndex.exerciseKey,setKey: currentExerciseSet.setKey,
                     weight:   int.parse(weight),reps:  int.parse(reps),date:  today);
-                  updateSet(index, updatedSet);
+                  updateSet(updatedSet.setKey??'', updatedSet);
                   Navigator.of(context).pop();
                   weightController.clear();
                   repsController.clear();
@@ -290,7 +331,7 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
             TextButton(
               onPressed: () {
                 final setToDelete = setsData[index];
-                deleteSetByExerciseId(setToDelete.exerciseId, index, setsData);
+                deleteSetByExerciseId(setToDelete.exerciseId, setToDelete.setKey??'', setsData);
                 Navigator.of(context).pop();
                 loadSets();
               },

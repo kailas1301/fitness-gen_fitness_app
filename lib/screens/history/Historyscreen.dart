@@ -126,13 +126,17 @@ class _HistoryScrnState extends State<HistoryScrn> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-              String exerciseKey = groupSetsByExercise().keys.elementAt(index);
-List<SetModel> exerciseSets = groupSetsByExercise()[exerciseKey]!;
-final exerciseKeyforGettingName = exerciseSets.first.exercise.exerciseKey;
-
+                String exerciseKey =
+                    groupSetsByExercise().keys.elementAt(index);
+                List<SetModel> exerciseSets =
+                    groupSetsByExercise()[exerciseKey]!;
+                final exerciseName = exerciseSets.first.exerciseId;
+                final exerciseKeyforGettingName =
+                    exerciseSets.first.exercise.exerciseKey.toString();
 
                 return FutureBuilder<String>(
-                  future: getExerciseName(exerciseKeyforGettingName!),
+                  future:
+                      getExerciseName(exerciseKeyforGettingName, exerciseName),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return CircularProgressIndicator();
@@ -252,14 +256,19 @@ final exerciseKeyforGettingName = exerciseSets.first.exercise.exerciseKey;
     }
   }
 
-  Future<String> getExerciseName(int setExerciseKey) async {
+  Future<String> getExerciseName(
+      String? setExerciseKey, String exerciseName) async {
     final exerciseBox = await Hive.openBox<ExerciseModel>('exercises');
     try {
-      final exercise = exerciseBox.values.firstWhere(
-        (exercise) => exercise.exerciseKey == setExerciseKey,
-      );
-      final name = exercise.name;
-      return name;
+      if (setExerciseKey != null) {
+        final exercise = exerciseBox.values.firstWhere(
+          (exercise) => exercise.exerciseKey == setExerciseKey,
+        );
+        final name = exercise.name;
+        return name;
+      } else {
+        return exerciseName;
+      }
     } catch (error) {
       print('Error getting exercise name: $error');
       return '';
