@@ -8,19 +8,28 @@ class AboutApp extends StatefulWidget {
 }
 
 class _AboutAppState extends State<AboutApp> {
- final String appName = 'FitGen';
-  final String version = '1.0.0';
-  final String description =
-      'FitGen is your ultimate fitness companion, helping you achieve your health and wellness goals. Stay active, stay healthy!';
+  final String appName = 'FitGen';
+  final String version = '1.0.0';   
   final String developer = 'Kailas A Anil';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.white,
-      appBar: AppBar(leading: IconButton(onPressed: () {
-        Navigator.pop(context);
-      }, icon: const Icon(Icons.arrow_back,color: Colors.black,)),
-        title: const Text('About App',style: TextStyle(color: Colors.black),),centerTitle: true,elevation: 0,backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+        ),
+        title: const Text(
+          'About App',
+          style: TextStyle(color: Colors.black),
+        ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -36,17 +45,52 @@ class _AboutAppState extends State<AboutApp> {
             ),
             const SizedBox(height: 16),
             Text(
-              description,
-              style: const TextStyle(fontSize: 16),
+               'Welcome to $appName, your ultimate fitness companion designed to empower you on your health and wellness journey. Stay active, stay healthy!',
+              style: const TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Key Features:',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              '• Personalized Workouts: Tailored fitness plans to match your goals.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[800], // Adjust color for emphasis
+              ),
+            ),
+            Text(
+              '• Health Tracking: Monitor your daily steps, water consumption, and more.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[800], // Adjust color for emphasis
+              ),
+            ),
+            Text(
+              '• Reminders: Stay on track with notifications for workouts and hydration.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[800], // Adjust color for emphasis
+              ),
             ),
             const SizedBox(height: 16),
             Text(
               'Developer: $developer',
-              style: const TextStyle(fontSize: 16)
+              style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 16),
             const Text(
-              'Contact us: support@ kailaskailu56@gmail.com',
+              'Contact us: support at ',
+              style: TextStyle(fontSize: 16, color: Colors.blue),
+            ),            const Text(
+             'kailaskailu56@gmail.com',
               style: TextStyle(fontSize: 16, color: Colors.blue),
             ),
           ],

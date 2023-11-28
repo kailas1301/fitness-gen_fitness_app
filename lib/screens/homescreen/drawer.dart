@@ -29,9 +29,9 @@ class _DrawerClassState extends State<DrawerClass> {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Color.fromARGB(255, 239, 237, 244),
-            Color.fromARGB(255, 112, 90, 151),
+          colors: [ Color.fromARGB(255, 138, 95, 219),
+            Color.fromARGB(255, 255, 255, 255)
+         
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,

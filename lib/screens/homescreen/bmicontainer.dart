@@ -31,7 +31,7 @@ class _BmiContainerState extends State<BmiContainer> {
     double minIdealWeight = userIdealWeight - 2;
     double maxIdealWeight = userIdealWeight + 2;
     return Container(
-      height: widget.screenHeight * 0.4,
+      height: widget.screenHeight * 0.36,
       width: widget.screenWidth * 0.92,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
@@ -129,32 +129,32 @@ class _BmiContainerState extends State<BmiContainer> {
                     ),
                     Text('IDEAL WEIGHT IS',
                         style: GoogleFonts.poppins(
-                            fontSize: screenWidth * .04,
-                            fontWeight: FontWeight.w700,
+                            fontSize: screenWidth * .035,
+                            fontWeight: FontWeight.w800,
                             color: Colors.black)),
                     Row(
                       children: [
                         Text(
                           '${minIdealWeight.toStringAsFixed(0)}Kg',
                           style: GoogleFonts.roboto(
-                              fontSize: widget.screenWidth * .06,
-                              fontWeight: FontWeight.w700,
+                              fontSize: widget.screenWidth * .055,
+                              fontWeight: FontWeight.w800,
                               color: Colors.black),
                         ),
                         SizedBox(width: widget.screenWidth * .01),
                         Text(
                           'to',
                           style: GoogleFonts.roboto(
-                              fontSize: widget.screenWidth * .06,
-                              fontWeight: FontWeight.w700,
+                              fontSize: widget.screenWidth * .055,
+                              fontWeight: FontWeight.w800,
                               color: Colors.black),
                         ),
                         SizedBox(width: widget.screenWidth * .01),
                         Text(
                           '${maxIdealWeight.toStringAsFixed(0)}Kg',
                           style: GoogleFonts.roboto(
-                              fontSize: widget.screenWidth * .06,
-                              fontWeight: FontWeight.w700,
+                              fontSize: widget.screenWidth * .055,
+                              fontWeight: FontWeight.w800,
                               color: Colors.black),
                         ),
                       ],

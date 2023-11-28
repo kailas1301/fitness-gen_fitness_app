@@ -51,17 +51,7 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
     });
   }
 
-  void _togglePause() {
-    setState(() {
-      isPaused = !isPaused;
-      if (isPaused) {
-        stepCountStream =
-            const Stream.empty(); // Pause by using an empty stream
-      } else {
-        initPedometer(); // Resume by initializing the stream again
-      }
-    });
-  }
+
 
   void _restart() {
     setState(() {
@@ -180,22 +170,6 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                ElevatedButton(
-                                  onPressed: _togglePause,
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    minimumSize: Size(widget.screenWidth * 0.2,
-                                        50), // Set the width and height
-                                  ),
-                                  child: Text(
-                                    isPaused ? 'Resume' : 'Pause',
-                                    style: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
                                 SizedBox(height: widget.screenWidth * 0.02),
                                 ElevatedButton(
                                   onPressed: _restart,
@@ -205,7 +179,7 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
                                           20.0), // Set the border radius
                                     ),
                                     minimumSize: Size(widget.screenWidth * 0.2,
-                                        50), // Set the width and height
+                                        50), 
                                   ),
                                   child: const Text(
                                     'Restart',

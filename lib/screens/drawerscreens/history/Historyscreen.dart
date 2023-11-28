@@ -118,7 +118,10 @@ class _HistoryScrnState extends State<HistoryScrn> {
                         ),
                       ],
                     ),
-                  ),
+                  ), Center(child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('WorkoutHistory',style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.w700),),
+                  ))
                 ],
               ),
             ]),
@@ -133,13 +136,12 @@ class _HistoryScrnState extends State<HistoryScrn> {
                 final exerciseName = exerciseSets.first.exerciseId;
                 final exerciseKeyforGettingName =
                     exerciseSets.first.exercise.exerciseKey.toString();
-
                 return FutureBuilder<String>(
                   future:
                       getExerciseName(exerciseKeyforGettingName, exerciseName),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     } else if (snapshot.hasError) {
                       return Text('Error: ${snapshot.error}');
                     } else {

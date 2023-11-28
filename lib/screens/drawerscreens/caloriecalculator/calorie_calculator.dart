@@ -66,8 +66,15 @@ class _CalorieCalculatorScreenState extends State<CalorieCalculatorScreen> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Calorie Calculator'),
+      backgroundColor: Colors.white,
+      appBar: AppBar(backgroundColor: Colors.white,elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(Icons.arrow_back,color: Colors.black)),
+        title: const Text('Calorie Calculator',style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.w700),),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
