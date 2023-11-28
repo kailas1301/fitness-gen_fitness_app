@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pedometer/pedometer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StepTrackerScrn extends StatefulWidget {
   const StepTrackerScrn({
@@ -24,12 +25,24 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
   bool isPaused = false;
   double caloriesPerStep = 0.04;
   double calories = 0;
+  int previousSteps = 0;
+  int stepsFromPlugin = 0;
 
   @override
-  void initState() {
-    super.initState();
-    initPedometer();
-  }
+ void initState() {
+  super.initState();
+  _loadPreviousSteps();
+  initPedometer();
+}
+
+void _loadPreviousSteps() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  int storedPreviousSteps = prefs.getInt('previousSteps') ?? 0;
+
+  setState(() {
+    previousSteps = storedPreviousSteps;
+  });
+}
 
   void initPedometer() {
     stepCountStream = Pedometer.stepCountStream;
@@ -39,7 +52,8 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
   void _onStepCount(StepCount event) {
     setState(() {
       if (!isPaused) {
-        steps = event.steps.toString();
+        stepsFromPlugin = event.steps;
+        steps = (stepsFromPlugin - previousSteps).toString();
         calories = int.parse(steps) * caloriesPerStep;
       }
     });
@@ -51,14 +65,16 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
     });
   }
 
+void _restart() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
 
+  setState(() {
+    prefs.setInt('previousSteps', stepsFromPlugin);
+    previousSteps = stepsFromPlugin;
+    initPedometer();
+  });
+}
 
-  void _restart() {
-    setState(() {
-      steps = '0';
-      initPedometer();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +115,7 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
             child: Column(
               children: [
                 Text(
-                  'TRACK YOUR DAILY STEPS',
+                  'TRACK YOUR STEPS',
                   style: GoogleFonts.openSans(
                     fontWeight: FontWeight.w800,
                     fontSize: widget.screenHeight * .025,
@@ -178,8 +194,8 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
                                       borderRadius: BorderRadius.circular(
                                           20.0), // Set the border radius
                                     ),
-                                    minimumSize: Size(widget.screenWidth * 0.2,
-                                        50), 
+                                    minimumSize:
+                                        Size(widget.screenWidth * 0.2, 50),
                                   ),
                                   child: const Text(
                                     'Restart',
