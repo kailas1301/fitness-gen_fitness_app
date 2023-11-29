@@ -60,14 +60,20 @@ class _AboutAppState extends State<AboutApp> {
             ),
             const SizedBox(height: 8),
             Text(
-              '• Personalized Workouts: Tailored fitness plans to match your goals.',
+              '• Personalized Workouts: Create your customized workout plans to match your goals.',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[800], // Adjust color for emphasis
               ),
             ),
             Text(
-              '• Health Tracking: Monitor your daily steps, water consumption, and more.',
+              '• Health Tracking: Monitor your steps, water consumption, and more.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[800], // Adjust color for emphasis
+              ),
+            ), Text(
+              '•Calorie calculator to calculate your maintainence and your goal calorie to achieve your goal weight.',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[800], // Adjust color for emphasis
@@ -87,8 +93,8 @@ class _AboutAppState extends State<AboutApp> {
             ),
             const SizedBox(height: 16),
             const Text(
-              'Contact us: support at ',
-              style: TextStyle(fontSize: 16, color: Colors.blue),
+              'Contact us: support at :',
+              style: TextStyle(fontSize: 16, color: Colors.black),
             ),            const Text(
              'kailaskailu56@gmail.com',
               style: TextStyle(fontSize: 16, color: Colors.blue),

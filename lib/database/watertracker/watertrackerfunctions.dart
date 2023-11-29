@@ -1,6 +1,8 @@
 import 'package:fitnessapplication/database/watertracker/watertrackerdatabase.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+
+// to add glass of water
 Future<void> addGlassOfWater(int numberOfGlasses) async {
   final today = DateTime.now();
   final formattedDate =
@@ -20,6 +22,8 @@ Future<void> addGlassOfWater(int numberOfGlasses) async {
   }
 }
 
+
+// to get the amount of water
 Future<int> getWaterIntakeForDate(DateTime selectedDate) async {
   final formattedDate =
       '${selectedDate.year}${selectedDate.month.toString().padLeft(2, '0')}${selectedDate.day.toString().padLeft(2, '0')}';

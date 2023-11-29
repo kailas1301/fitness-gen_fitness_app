@@ -22,59 +22,59 @@ class StepTrackerScrn extends StatefulWidget {
 class _StepTrackerScrnState extends State<StepTrackerScrn> {
   late Stream<StepCount> stepCountStream;
   String steps = '0';
-  bool isPaused = false;
   double caloriesPerStep = 0.04;
   double calories = 0;
   int previousSteps = 0;
   int stepsFromPlugin = 0;
 
   @override
- void initState() {
-  super.initState();
-  _loadPreviousSteps();
-  initPedometer();
-}
-
-void _loadPreviousSteps() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  int storedPreviousSteps = prefs.getInt('previousSteps') ?? 0;
-
-  setState(() {
-    previousSteps = storedPreviousSteps;
-  });
-}
-
-  void initPedometer() {
-    stepCountStream = Pedometer.stepCountStream;
-    stepCountStream.listen(_onStepCount).onError(_onStepCountError);
+  void initState() {
+    super.initState();
+    _loadPreviousSteps();
+    initPedometer();
   }
 
-  void _onStepCount(StepCount event) {
+// to get the previous steps stored in the sharedpreference
+  void _loadPreviousSteps() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int storedPreviousSteps = prefs.getInt('previousSteps') ?? 0;
+
     setState(() {
-      if (!isPaused) {
-        stepsFromPlugin = event.steps;
-        steps = (stepsFromPlugin - previousSteps).toString();
-        calories = int.parse(steps) * caloriesPerStep;
-      }
+      previousSteps = storedPreviousSteps;
     });
   }
 
-  void _onStepCountError(error) {
+// to initialize pedometer
+  void initPedometer() {
+    stepCountStream = Pedometer.stepCountStream;
+    stepCountStream.listen(_onStepCount).onError(onStepCountError);
+  }
+
+// to store steps from plugin to a variable
+  void _onStepCount(StepCount event) {
+    setState(() {
+      stepsFromPlugin = event.steps;
+      steps = (stepsFromPlugin - previousSteps).toString();
+      calories = int.parse(steps) * caloriesPerStep;
+    });
+  }
+
+  void onStepCountError(error) {
     setState(() {
       steps = 'Step Count not available';
     });
   }
 
-void _restart() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
+// to restart the step count to zero
+  void restart() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  setState(() {
-    prefs.setInt('previousSteps', stepsFromPlugin);
-    previousSteps = stepsFromPlugin;
-    initPedometer();
-  });
-}
-
+    setState(() {
+      prefs.setInt('previousSteps', stepsFromPlugin);
+      previousSteps = stepsFromPlugin;
+      initPedometer();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +188,7 @@ void _restart() async {
                               children: [
                                 SizedBox(height: widget.screenWidth * 0.02),
                                 ElevatedButton(
-                                  onPressed: _restart,
+                                  onPressed: restart,
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(

@@ -31,7 +31,7 @@ class _BmiContainerState extends State<BmiContainer> {
     double minIdealWeight = userIdealWeight - 2;
     double maxIdealWeight = userIdealWeight + 2;
     return Container(
-      height: widget.screenHeight * 0.36,
+      // height: widget.screenHeight * 0.36,
       width: widget.screenWidth * 0.92,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
@@ -115,53 +115,40 @@ class _BmiContainerState extends State<BmiContainer> {
                   ],
                 ),
                 SizedBox(width: widget.screenWidth * .03),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: widget.screenWidth * .32,
-                      width: widget.screenWidth * .32,
-                      child: Image.asset(
-                          'assets/images/—Pngtree—cartoon character fitness female sports_5426484.png'),
-                    ),
-                    SizedBox(
-                      height: widget.screenHeight * .02,
-                    ),
-                    Text('IDEAL WEIGHT IS',
-                        style: GoogleFonts.poppins(
-                            fontSize: screenWidth * .035,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.black)),
-                    Row(
-                      children: [
-                        Text(
-                          '${minIdealWeight.toStringAsFixed(0)}Kg',
-                          style: GoogleFonts.roboto(
-                              fontSize: widget.screenWidth * .055,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.black),
-                        ),
-                        SizedBox(width: widget.screenWidth * .01),
-                        Text(
-                          'to',
-                          style: GoogleFonts.roboto(
-                              fontSize: widget.screenWidth * .055,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.black),
-                        ),
-                        SizedBox(width: widget.screenWidth * .01),
-                        Text(
-                          '${maxIdealWeight.toStringAsFixed(0)}Kg',
-                          style: GoogleFonts.roboto(
-                              fontSize: widget.screenWidth * .055,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ],
+                SizedBox(
+                  height: widget.screenWidth * .32,
+                  width: widget.screenWidth * .32,
+                  child: Image.asset(
+                      'assets/images/—Pngtree—cartoon character fitness female sports_5426484.png'),
                 )
               ],
+            ),
+            SizedBox(height: widget.screenWidth * .03),
+            Column(
+              children: [
+                Text(
+                  'IDEAL WEIGHT IS',
+                  style: GoogleFonts.openSans(
+                    fontWeight: FontWeight.w800,
+                    fontSize: widget.screenHeight * .025,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '${minIdealWeight.toStringAsFixed(0)}Kg TO ${maxIdealWeight.toStringAsFixed(0)}Kg',
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w900,
+                        fontSize: widget.screenHeight * .024,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: widget.screenHeight * .03,
             ),
           ],
         ),

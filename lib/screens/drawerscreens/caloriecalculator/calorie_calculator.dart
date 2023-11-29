@@ -20,7 +20,7 @@ class _CalorieCalculatorScreenState extends State<CalorieCalculatorScreen> {
   bool isMale = true; // Default to male
 
   final _formKey = GlobalKey<FormState>();
-
+// function to calculate calories
   void calculateCalories() {
     setState(() {
       calculationMessage = 'Calculating...';
@@ -31,19 +31,21 @@ class _CalorieCalculatorScreenState extends State<CalorieCalculatorScreen> {
 
       // Calculate BMR using Harris-Benedict equation
       double bmr;
+      // to calculate bmr for male 
       if (isMale) {
         bmr = 88.362 +
             (13.397 * currentWeight) +
             (4.799 * height) -
             (5.677 * age);
       } else {
+           // to calculate bmr for female 
         bmr = 447.593 +
             (9.247 * currentWeight) +
             (3.098 * height) -
             (4.331 * age);
       }
 
-      // Calculate TDEE
+      // Calculate TDEE 
       double tdee = bmr * activityFactor;
 
       // Calculate caloric deficit/surplus based on goal weight
@@ -57,7 +59,7 @@ class _CalorieCalculatorScreenState extends State<CalorieCalculatorScreen> {
       });
     } else {
       setState(() {
-        calculationMessage = 'Invalid input. Please enter valid values.';
+        calculationMessage = 'Invalid input.';
       });
     }
   }

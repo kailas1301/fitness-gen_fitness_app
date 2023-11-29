@@ -67,6 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       await updateUserDetails(updatedUser);
 
+      // ignore: use_build_context_synchronously
       showSnackbar(context, 'Information updated!', Colors.green);
     } else if (int.parse(glassController.text) <
         int.parse(userdata!.limitOfGlass)) {
@@ -110,11 +111,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(height: screenHeight * .02),
                           Text(
                             'Edit Your Profile',
-                            style: GoogleFonts.openSans(
-                              color: Colors.deepPurple,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18,
-                            ),
+                                 style: GoogleFonts.openSans(
+                    fontWeight: FontWeight.w800,
+                    fontSize: screenHeight * .025,
+                  ),
                           ),
                           SizedBox(height: screenHeight * .02),
                           GestureDetector(
@@ -208,17 +208,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   errorText: 'Enter valid number',
                                   keyboardType: TextInputType.number,
                                 ),
-                                SizedBox(height: screenHeight * .02),
+                                SizedBox(height: screenHeight * .06),
                                 ElevatedButton(
                                     onPressed: () {
                                       updateUserData();
                                     },
                                     style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 114, 62, 174),
+                                        backgroundColor:
+                                            const Color.fromARGB(255, 128, 83, 179),
                                         minimumSize:
                                             const Size(double.infinity, 50)),
-                                    child: const Text('Save')),
+                                    child: Text(
+                                      'Save',
+                                      style: GoogleFonts.openSans(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: screenHeight * .02,
+                                      ),
+                                    )),
                               ],
                             ),
                           ),

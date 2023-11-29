@@ -2,10 +2,11 @@ import 'dart:io';
 import 'package:fitnessapplication/database/userinformation/userdata.dart';
 import 'package:fitnessapplication/screens/drawerscreens/aboutapp/about_app.dart';
 import 'package:fitnessapplication/screens/drawerscreens/caloriecalculator/calorie_calculator.dart';
-import 'package:fitnessapplication/screens/drawerscreens/history/Historyscreen.dart';
+import 'package:fitnessapplication/screens/history/historyscreen.dart';
 import 'package:fitnessapplication/screens/drawerscreens/privacypolicy/privacy_policy.dart';
-import 'package:fitnessapplication/screens/drawerscreens/profile/profile.dart';
+import 'package:fitnessapplication/screens/profile/profile.dart';
 import 'package:fitnessapplication/screens/drawerscreens/reminder_screens/reminders.dart';
+import 'package:fitnessapplication/widgets/customtilefordrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -26,12 +27,14 @@ class DrawerClass extends StatefulWidget {
 class _DrawerClassState extends State<DrawerClass> {
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [ Color.fromARGB(255, 138, 95, 219),
+          colors: [
+            Color.fromARGB(255, 138, 95, 219),
             Color.fromARGB(255, 255, 255, 255)
-         
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -75,18 +78,18 @@ class _DrawerClassState extends State<DrawerClass> {
                 const SizedBox(height: 10),
                 Text(
                   widget.userdata?.fullName.toUpperCase() ?? '',
-                  style: GoogleFonts.roboto(
-                      fontSize: 25, fontWeight: FontWeight.w700),
+                  style: GoogleFonts.openSans(
+                    fontWeight: FontWeight.w700,
+                    fontSize: screenHeight * .025,
+                  ),
                 ),
                 const SizedBox(height: 20),
               ],
             ),
           ),
-
-          // Section with history icon
-          ListTile(
-            leading: const Icon(Icons.history, size: 30),
-            title: const Text('History'),
+          CustomListTile(
+            icon: Icons.history,
+            title: 'History',
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -95,10 +98,9 @@ class _DrawerClassState extends State<DrawerClass> {
               );
             },
           ),
-          // Section with profile icon
-          ListTile(
-            leading: const Icon(Icons.person, size: 30),
-            title: const Text('Profile'),
+          CustomListTile(
+            icon: Icons.person,
+            title: 'Profile',
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -107,9 +109,9 @@ class _DrawerClassState extends State<DrawerClass> {
               );
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.timer, size: 30),
-            title: const Text('Reminders'),
+          CustomListTile(
+            icon: Icons.timer,
+            title: 'Reminders',
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -118,9 +120,9 @@ class _DrawerClassState extends State<DrawerClass> {
               );
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.health_and_safety),
-            title: const Text('Calorie Calculator'),
+          CustomListTile(
+            icon: Icons.health_and_safety,
+            title: 'Calorie Calculator',
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -129,9 +131,9 @@ class _DrawerClassState extends State<DrawerClass> {
               );
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.info_outline_rounded),
-            title: const Text('About App'),
+          CustomListTile(
+            icon: Icons.info_outline_rounded,
+            title: 'About App',
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -140,9 +142,9 @@ class _DrawerClassState extends State<DrawerClass> {
               );
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.privacy_tip_rounded),
-            title: const Text('Privacy Policy'),
+          CustomListTile(
+            icon: Icons.privacy_tip_rounded,
+            title: 'Privacy Policy',
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -156,3 +158,4 @@ class _DrawerClassState extends State<DrawerClass> {
     );
   }
 }
+

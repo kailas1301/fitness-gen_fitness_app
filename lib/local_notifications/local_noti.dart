@@ -36,6 +36,7 @@ class NotificationService {
         id, title, body, await notificationDetails());
   }
 
+// to give a notification
   Future scheduleNotification(
       {int id = 1,
       String? title,
@@ -56,6 +57,8 @@ class NotificationService {
             UILocalNotificationDateInterpretation.absoluteTime);
   }
 
+
+// to give a notification for a selected intereval of time
   Future<void> schedulePeriodicNotification({
     int id = 2,
     String? title,
@@ -72,6 +75,8 @@ class NotificationService {
     );
   }
 
+
+// to give a notification for a selected time everyday 
   Future<void> scheduleDailyNotificationAtTime({
     int id = 3,
     String? title,

@@ -84,7 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      drawer: Drawer(width: screenWidth,
+      drawer: Drawer(
+        width: screenWidth,
         elevation: 4,
         child: DrawerClass(
           userdata: userdata,

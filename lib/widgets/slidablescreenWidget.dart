@@ -6,7 +6,7 @@ class SlidableScreen extends StatelessWidget {
   const SlidableScreen({
     super.key,
     required this.screenWidth,
-    required this.screenHeight,
+    // required this.screenHeight,
     required this.title,
     required this.subTitle,
     required this.description,
@@ -14,7 +14,7 @@ class SlidableScreen extends StatelessWidget {
   });
 
   final double screenWidth;
-  final double screenHeight;
+  // final double screenHeight;
   final String title;
   final String subTitle;
   final String description;
@@ -22,6 +22,7 @@ class SlidableScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   final screenHeight = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.all(screenWidth * .03),
       child: Container(

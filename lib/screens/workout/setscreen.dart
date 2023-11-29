@@ -44,42 +44,7 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
       setsData = exerciseSets;
     });
   }
-// Future<void> loadSets() async {
-//   final setBox = await Hive.openBox<SetModel>('sets');
-//   List<SetModel> exerciseSets;
 
-//   if (widget.exerciseAtIndex.exerciseKey == null) {
-//     // Sort by exercise name and ID if exerciseKey is null
-//     exerciseSets = setBox.values
-//         .where((set) =>
-//             set.exercise.name == widget.exerciseName &&
-//             set.date.year == today.year &&
-//             set.date.month == today.month &&
-//             set.date.day == today.day)
-//         .toList()
-//         ..sort((a, b) {
-//           // Custom sorting logic based on exercise name and ID
-//           final result = a.exerciseId.compareTo(b.exerciseId);
-//           if (result == 0) {
-//             return a.exercise.name.compareTo(b.exercise.name);
-//           }
-//           return result;
-//         });
-//   } else {
-//     // Use the existing method if exerciseKey is not null
-//     exerciseSets = setBox.values
-//         .where((set) =>
-//             set.exerciseKey == widget.exerciseAtIndex.exerciseKey &&
-//             set.date.year == today.year &&
-//             set.date.month == today.month &&
-//             set.date.day == today.day)
-//         .toList();
-//   }
-
-//   setState(() {
-//     setsData = exerciseSets;
-//   });
-// }
 
   @override
   Widget build(BuildContext context) {

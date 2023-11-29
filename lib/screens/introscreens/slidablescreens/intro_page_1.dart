@@ -7,10 +7,10 @@ class IntroPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+    // final screenHeight = MediaQuery.of(context).size.height;
     return SlidableScreen(
       screenWidth: screenWidth,
-      screenHeight: screenHeight,
+      // screenHeight: screenHeight,
       title: 'Workout Tracker',
       subTitle: 'Achieve Your Fitness Goals',
       description:

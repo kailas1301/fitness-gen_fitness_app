@@ -70,10 +70,10 @@ class _HistoryScrnState extends State<HistoryScrn> {
                   Center(
                     child: Text(
                       "Selected Date: ${selectedDay?.day}-${selectedDay?.month}-${selectedDay?.year}",
-                      style: GoogleFonts.roboto(
-                        fontSize: screenHeight * .03,
-                        fontWeight: FontWeight.w600,
-                      ),
+                           style: GoogleFonts.openSans(
+                    fontWeight: FontWeight.w800,
+                    fontSize: screenHeight * .025,
+                  ),
                     ),
                   ),
                   Container(
@@ -98,29 +98,33 @@ class _HistoryScrnState extends State<HistoryScrn> {
                           children: [
                             Text(
                               "Water Intake",
-                              style: GoogleFonts.openSans(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            style: GoogleFonts.openSans(color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                    fontSize: screenHeight * .025,
+                  ),
                               textAlign: TextAlign.center,
                             ),
                             Text(
                               "$waterIntakeForSelectedDate glasses",
-                              style: GoogleFonts.openSans(
-                                fontSize: 25,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
+                                   style: GoogleFonts.openSans(color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                    fontSize: screenHeight * .025,
+                  ),
                               textAlign: TextAlign.center,
                             ),
                           ],
                         ),
                       ],
                     ),
-                  ), Center(child: Padding(
+                  ),
+                  Center(
+                      child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text('WorkoutHistory',style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.w700),),
+                    child: Text(
+                      'WorkoutHistory',
+                      style: GoogleFonts.poppins(
+                          fontSize: 20, fontWeight: FontWeight.w700),
+                    ),
                   ))
                 ],
               ),
@@ -262,7 +266,7 @@ class _HistoryScrnState extends State<HistoryScrn> {
       String? setExerciseKey, String exerciseName) async {
     final exerciseBox = await Hive.openBox<ExerciseModel>('exercises');
     try {
-      if (int.parse(setExerciseKey??'')>76) {
+      if (int.parse(setExerciseKey ?? '') > 76) {
         final exercise = exerciseBox.values.firstWhere(
           (exercise) => exercise.exerciseKey == setExerciseKey,
         );

@@ -23,30 +23,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             Padding(
               padding: EdgeInsets.all(screenWidth * 0.04),
-              child: Container(
-                // decoration: BoxDecoration(
-                //   color: const Color.fromARGB(255, 255, 255, 255),
-                //   borderRadius: BorderRadius.circular(screenWidth * 0.03),
-                //   border: Border.all(
-                //     width: 1,
-                //     color: const Color(0xFFDFDDDD),
-                //   ),
-                //   boxShadow: [
-                //     BoxShadow(
-                //       color: Colors.grey.shade400,
-                //       offset: const Offset(4.0, 4.0),
-                //       blurRadius: 15,
-                //       spreadRadius: 1,
-                //     ),
-                //     BoxShadow(
-                //       color: Colors.grey.shade400,
-                //       offset: const Offset(-4.0, -4.0),
-                //       blurRadius: 15,
-                //       spreadRadius: 1,
-                //     )
-                //   ],
-                // ),
-                height: screenHeight * 0.91,
+              child: SizedBox(
                 width: screenWidth * 1,
                 child: Column(
                   children: [
