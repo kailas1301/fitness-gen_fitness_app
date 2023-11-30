@@ -1,6 +1,5 @@
 import 'package:fitnessapplication/database/workoutdb/workoutmodel.dart';
 import 'package:fitnessapplication/screens/workout/functionsforworkout.dart';
-import 'package:fitnessapplication/screens/workout/setscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
@@ -288,159 +287,193 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Exercises for ${widget.category.name}',
-            style: GoogleFonts.openSans(
-              color: Colors.deepPurple,
-              fontWeight: FontWeight.w700,
-              fontSize: 20,
-            )),
-        centerTitle: true,
-        leading: IconButton(
+    if (exercises.isEmpty) {
+      return Scaffold(
+          appBar: AppBar(
+            title: Text('Exercises for ${widget.category.name}',
+                style: GoogleFonts.openSans(
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                )),
+            centerTitle: true,
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.deepPurple,
+                )),
+            backgroundColor: Colors.white,
+            elevation: 0,
+          ),        // to show a dialougue box to add new exercises
+        floatingActionButton: Padding(
+          padding: EdgeInsets.only(bottom: screenWidth * .12),
+          child: FloatingActionButton(
             onPressed: () {
-              Navigator.pop(context);
+              showExerciseDialog();
             },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.deepPurple,
-            )),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: Container(
-        color: Colors.white,
-        child: ListView.builder(
-          itemCount: exercises.length,
-          itemBuilder: (context, index) {
-            lengthOfList = exercises.length;
-            // selecting a exercise which is in the current index
-            final exerciseAtIndex = exercises[index];
-            // checking the exercise is a predifined exercise or not
-            if (int.parse(exerciseAtIndex.exerciseKey ?? '') < 76) {
-              isPredifined = true;
-            } else {
-              isPredifined = false;
-            }
+            child: const Icon(Icons.add),
+          ),
+        ),
+          body: const Center(child: Text('no exercises created')));
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Exercises for ${widget.category.name}',
+              style: GoogleFonts.openSans(
+                color: Colors.deepPurple,
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+              )),
+          centerTitle: true,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.deepPurple,
+              )),
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+        body: Container(
+          color: Colors.white,
+          child: ListView.builder(
+            itemCount: exercises.length,
+            itemBuilder: (context, index) {
+              lengthOfList = exercises.length;
+              // selecting a exercise which is in the current index
+              final exerciseAtIndex = exercises[index];
+              // checking the exercise is a predifined exercise or not
+              if (int.parse(exerciseAtIndex.exerciseKey ?? '') < 76) {
+                isPredifined = true;
+              } else {
+                isPredifined = false;
+              }
 
-            return Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25, top: 25),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 234, 232, 237),
-                  borderRadius: BorderRadius.circular(10),
-                  gradient: const LinearGradient(colors: [
-                    Color.fromARGB(255, 214, 208, 225),
-                    Color.fromARGB(255, 205, 188, 237)
-                  ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.shade400,
-                        offset: const Offset(2.0, 2.0),
-                        blurRadius: 10,
-                        spreadRadius: 1),
-                    BoxShadow(
-                        color: Colors.grey.shade400,
-                        offset: const Offset(-2.0, -2.0),
-                        blurRadius: 10,
-                        spreadRadius: 1),
-                  ],
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(screenWidth * .04),
-                  child: ListTile(
-                    title: Text(
-                      exerciseAtIndex.name.toUpperCase(),
-                      style: GoogleFonts.poppins(
-                        fontSize: screenWidth * .045,
-                        fontWeight: FontWeight.w600,
+              return Padding(
+                padding: const EdgeInsets.only(left: 25, right: 25, top: 25),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 234, 232, 237),
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: const LinearGradient(colors: [
+                      Color.fromARGB(255, 214, 208, 225),
+                      Color.fromARGB(255, 205, 188, 237)
+                    ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.shade400,
+                          offset: const Offset(2.0, 2.0),
+                          blurRadius: 10,
+                          spreadRadius: 1),
+                      BoxShadow(
+                          color: Colors.grey.shade400,
+                          offset: const Offset(-2.0, -2.0),
+                          blurRadius: 10,
+                          spreadRadius: 1),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(screenWidth * .04),
+                    child: ListTile(
+                      title: Text(
+                        exerciseAtIndex.name.toUpperCase(),
+                        style: GoogleFonts.poppins(
+                          fontSize: screenWidth * .045,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    onTap: () {
-                      navigateToSetEntryScreen(
-                          exerciseAtIndex.name, exerciseAtIndex);
-                    },
-                    trailing: isPredifined
-                        ? null // No edit/delete buttons for predefined exercises
-                        : Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.edit),
-                                onPressed: () {
-                                  showEditExerciseDialog(
-                                      index, lengthOfList!, exerciseAtIndex);
-                                },
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: const Text('Delete Exercise?'),
-                                        content: const Text(
-                                          'Are you sure you want to delete this exercise?',
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Text('Cancel'),
+                      onTap: () {
+                        navigateToSetEntryScreen(
+                            exerciseAtIndex.name, exerciseAtIndex, context);
+                      },
+                      trailing: isPredifined
+                          ? null // No edit/delete buttons for predefined exercises
+                          : Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.edit),
+                                  onPressed: () {
+                                    showEditExerciseDialog(
+                                        index, lengthOfList!, exerciseAtIndex);
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: const Text('Delete Exercise?'),
+                                          content: const Text(
+                                            'Are you sure you want to delete this exercise?',
                                           ),
-                                          TextButton(
-                                            onPressed: () {
-                                              deleteAnExercise(
-                                                  exerciseAtIndex,
-                                                  exerciseAtIndex.exerciseKey ??
-                                                      '');
-                                              loadExercises();
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text('Cancel'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                deleteAnExercise(
+                                                    exerciseAtIndex,
+                                                    exerciseAtIndex
+                                                            .exerciseKey ??
+                                                        '');
+                                                loadExercises();
 
-                                              // Navigate to ExerciseListScreen again and clear the stack
-                                              Navigator.pushAndRemoveUntil(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder:
-                                                      (BuildContext context) =>
-                                                          ExerciseListScreen(
-                                                              category: widget
-                                                                  .category),
-                                                ),
-                                                (route) => route
-                                                    .isFirst, // Remove all routes except the first one
-                                              );
-                                            },
-                                            child: const Text('Delete'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
+                                                // Navigate to ExerciseListScreen again and clear the stack
+                                                Navigator.pushAndRemoveUntil(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        ExerciseListScreen(
+                                                            category: widget
+                                                                .category),
+                                                  ),
+                                                  (route) => route
+                                                      .isFirst, // Remove all routes except the first one
+                                                );
+                                              },
+                                              child: const Text('Delete'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
-      ),
 
-      // to show a dialougue box to add new exercises
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: screenWidth * .12),
-        child: FloatingActionButton(
-          onPressed: () {
-            showExerciseDialog();
-          },
-          child: const Icon(Icons.add),
+        // to show a dialougue box to add new exercises
+        floatingActionButton: Padding(
+          padding: EdgeInsets.only(bottom: screenWidth * .12),
+          child: FloatingActionButton(
+            onPressed: () {
+              showExerciseDialog();
+            },
+            child: const Icon(Icons.add),
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   //  functions
@@ -540,17 +573,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
           ],
         );
       },
-    );
-  } // to navigate to setEntry screen after touching a exercise ;
-
-  void navigateToSetEntryScreen(
-      String exerciseName, ExerciseModel currentExercise) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SetEntryScreen(
-            exerciseName: exerciseName, exerciseAtIndex: currentExercise),
-      ),
     );
   }
 }

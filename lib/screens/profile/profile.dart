@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:fitnessapplication/database/userinformation/dbfunctions.dart';
 import 'package:fitnessapplication/database/userinformation/userdata.dart';
 import 'package:fitnessapplication/database/watertracker/watertrackerfunctions.dart';
+import 'package:fitnessapplication/screens/introscreens/personalinformations.dart';
 import 'package:fitnessapplication/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -111,10 +112,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(height: screenHeight * .02),
                           Text(
                             'Edit Your Profile',
-                                 style: GoogleFonts.openSans(color: Colors.deepPurple,
-                    fontWeight: FontWeight.w800,
-                    fontSize: screenHeight * .025,
-                  ),
+                            style: GoogleFonts.openSans(
+                              color: Colors.deepPurple,
+                              fontWeight: FontWeight.w800,
+                              fontSize: screenHeight * .025,
+                            ),
                           ),
                           SizedBox(height: screenHeight * .02),
                           GestureDetector(
@@ -214,8 +216,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       updateUserData();
                                     },
                                     style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color.fromARGB(255, 128, 83, 179),
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 128, 83, 179),
                                         minimumSize:
                                             const Size(double.infinity, 50)),
                                     child: Text(
@@ -240,14 +242,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-}
-
-void showSnackbar(BuildContext context, String message, Color backgroundColor) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(message),
-      duration: const Duration(seconds: 3),
-      backgroundColor: backgroundColor,
-    ),
-  );
 }

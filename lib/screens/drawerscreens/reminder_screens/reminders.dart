@@ -82,7 +82,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                                 id: 1,
                                 title: 'Drink Water',
                                 body: 'It\'s time to drink water!',
-                                repeatInterval: RepeatInterval.everyMinute,
+                                repeatInterval: RepeatInterval.hourly,
                               );
                             } else {
                               NotificationService().cancelNotification(1);

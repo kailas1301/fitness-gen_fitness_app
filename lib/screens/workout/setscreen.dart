@@ -144,14 +144,15 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.delete),
-                                  onPressed: () {
-                                    deleteSet(
-                                        context: context,
-                                        index: index,
-                                        loadSets: loadSets(),
-                                        setsData: setsData);
-                                    loadSets();
-                                  },
+                                 onPressed: () async {
+  await deleteSet(
+    context: context,
+    index: index,
+    setsData: setsData,
+  );
+  await loadSets();
+},
+
                                 ),
                               ],
                             ),

@@ -38,11 +38,11 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
   void _loadPreviousSteps() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int storedPreviousSteps = prefs.getInt('previousSteps') ?? 0;
-
     setState(() {
       previousSteps = storedPreviousSteps;
     });
   }
+
 
 // to initialize pedometer
   void initPedometer() {
@@ -51,14 +51,16 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
   }
 
 // to store steps from plugin to a variable
-  void _onStepCount(StepCount event) {
+ Future <void> _onStepCount(StepCount event) async {
+        if(stepsFromPlugin<previousSteps){ 
+         SharedPreferences prefs = await SharedPreferences.getInstance(); 
+          prefs.setInt('previousSteps', 0);}
     setState(() {
       stepsFromPlugin = event.steps;
       steps = (stepsFromPlugin - previousSteps).toString();
       calories = int.parse(steps) * caloriesPerStep;
     });
   }
-
   void onStepCountError(error) {
     setState(() {
       steps = 'Step Count not available';

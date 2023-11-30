@@ -1,5 +1,6 @@
 import 'package:fitnessapplication/database/workoutdb/workoutmodel.dart';
 import 'package:fitnessapplication/screens/workout/exercises.dart';
+import 'package:fitnessapplication/screens/workout/setscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -132,8 +133,7 @@ Future<void> updateSet(String key, SetModel updatedSet) async {
 }
 
 // to deleta a set using key
-Future<void> deleteSetByExerciseId(
-    String exerciseId, String key, List<SetModel> setsList) async {
+Future<void> deleteSetByExerciseId( String key, List<SetModel> setsList) async {
   final setBox = await Hive.openBox<SetModel>('sets');
   await setBox.delete(key);
 }
@@ -152,11 +152,11 @@ Future<List<SetModel>> getSetDataForTheDay(DateTime selectedDate) async {
 
 // to delete a set from the database
 
-void deleteSet(
+Future<void> deleteSet(
     {required int index,
     required List<SetModel> setsData,
     required BuildContext context,
-    required Future<void> loadSets}) {
+   }) async{
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -174,9 +174,9 @@ void deleteSet(
             onPressed: () {
               final setToDelete = setsData[index];
               deleteSetByExerciseId(
-                  setToDelete.exerciseId, setToDelete.setKey ?? '', setsData);
+                  setToDelete.setKey ?? '', setsData);
               Navigator.of(context).pop();
-              loadSets;
+             
             },
             child: const Text('Delete'),
           ),
@@ -195,4 +195,15 @@ void deleteSet(
     ));
   }
 
-  
+  // to navigate to setEntry screen after touching a exercise ;
+
+  void navigateToSetEntryScreen(
+      String exerciseName, ExerciseModel currentExercise,BuildContext context) {
+    Navigator.push( 
+      context,
+      MaterialPageRoute(
+        builder: (context) => SetEntryScreen(
+            exerciseName: exerciseName, exerciseAtIndex: currentExercise),
+      ),
+    );
+  }

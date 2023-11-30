@@ -32,3 +32,14 @@ void onTabChange(int index, int selectedIndex, BuildContext context) {
     );
   }
 }
+
+
+void showSnackbar(BuildContext context, String message, Color backgroundColor) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+      duration: const Duration(seconds: 3),
+      backgroundColor: backgroundColor,
+    ),
+  );
+}

@@ -161,101 +161,110 @@ class _HistoryScrnState extends State<HistoryScrn> {
                 final exerciseName = exerciseSets.first.exerciseId;
                 final exerciseKeyforGettingName =
                     exerciseSets.first.exercise.exerciseKey.toString();
-                return FutureBuilder<String>(
-                  future:
-                      getExerciseName(exerciseKeyforGettingName, exerciseName),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    } else {
-                      final exerciseToDisplayName = snapshot.data;
+                if (listOfSetsForTheDay.isEmpty) {
+                  return const SizedBox(
+                    height: 200,
+                    child: Center(child: Text("No exercises done today")),
+                  );
+                } else {
+                  return FutureBuilder<String>(
+                    future: getExerciseName(
+                        exerciseKeyforGettingName, exerciseName),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        final exerciseToDisplayName = snapshot.data;
 
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: screenHeight * .015,
-                              left: screenHeight * .03,
-                              right: screenHeight * .03,
-                              bottom: screenHeight * .015,
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 234, 232, 237),
-                                borderRadius: BorderRadius.circular(10),
-                                gradient: const LinearGradient(
-                                  colors: [
-                                    Color.fromARGB(255, 214, 208, 225),
-                                    Color.fromARGB(255, 205, 188, 237),
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.shade400,
-                                    offset: const Offset(2.0, 2.0),
-                                    blurRadius: 10,
-                                    spreadRadius: 1,
-                                  ),
-                                  BoxShadow(
-                                    color: Colors.grey.shade400,
-                                    offset: const Offset(-2.0, -2.0),
-                                    blurRadius: 10,
-                                    spreadRadius: 1,
-                                  ),
-                                ],
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: screenHeight * .015,
+                                left: screenHeight * .03,
+                                right: screenHeight * .03,
+                                bottom: screenHeight * .015,
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      exerciseToDisplayName
-                                          .toString()
-                                          .toUpperCase(),
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(255, 234, 232, 237),
+                                  borderRadius: BorderRadius.circular(10),
+                                  gradient: const LinearGradient(
+                                    colors: [
+                                      Color.fromARGB(255, 214, 208, 225),
+                                      Color.fromARGB(255, 205, 188, 237),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.shade400,
+                                      offset: const Offset(2.0, 2.0),
+                                      blurRadius: 10,
+                                      spreadRadius: 1,
                                     ),
-                                    const SizedBox(height: 10),
-                                    // Display sets for the exercise
-                                    for (var set in exerciseSets)
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text(
-                                            ' Weight: ${set.weight} kg',
-                                            style: GoogleFonts.poppins(
-                                              fontSize: screenHeight * .0195,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Reps: ${set.reps}',
-                                            style: GoogleFonts.poppins(
-                                              fontSize: screenHeight * .0195,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    const SizedBox(height: 20),
+                                    BoxShadow(
+                                      color: Colors.grey.shade400,
+                                      offset: const Offset(-2.0, -2.0),
+                                      blurRadius: 10,
+                                      spreadRadius: 1,
+                                    ),
                                   ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        exerciseToDisplayName
+                                            .toString()
+                                            .toUpperCase(),
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      // Display sets for the exercise
+                                      for (var set in exerciseSets)
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Text(
+                                              ' Weight: ${set.weight} kg',
+                                              style: GoogleFonts.poppins(
+                                                fontSize: screenHeight * .0195,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Reps: ${set.reps}',
+                                              style: GoogleFonts.poppins(
+                                                fontSize: screenHeight * .0195,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      const SizedBox(height: 20),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      );
-                    }
-                  },
-                );
+                          ],
+                        );
+                      }
+                    },
+                  );
+                }
               },
               childCount: groupSetsByExercise(listOfSetsForTheDay).length,
             ),
