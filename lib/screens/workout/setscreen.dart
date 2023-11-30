@@ -8,7 +8,8 @@ class SetEntryScreen extends StatefulWidget {
   final String exerciseName;
   final ExerciseModel exerciseAtIndex;
 
-  const SetEntryScreen({super.key, required this.exerciseName, required this.exerciseAtIndex});
+  const SetEntryScreen(
+      {super.key, required this.exerciseName, required this.exerciseAtIndex});
 
   @override
   State<SetEntryScreen> createState() => _SetEntryScreenState();
@@ -29,22 +30,20 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
   Future<void> loadSets() async {
     final setBox = await Hive.openBox<SetModel>('sets');
     final exerciseSets = setBox.values
-        .where((set) =>
-        widget.exerciseAtIndex.exerciseKey==null?
-         set.exerciseId == widget.exerciseAtIndex.name &&
-            set.date.year == today.year &&
-            set.date.month == today.month &&
-            set.date.day == today.day:
-            set.exercise.exerciseKey == widget.exerciseAtIndex.exerciseKey &&
-            set.date.year == today.year &&
-            set.date.month == today.month &&
-            set.date.day == today.day)
+        .where((set) => widget.exerciseAtIndex.exerciseKey == null
+            ? set.exerciseId == widget.exerciseAtIndex.name &&
+                set.date.year == today.year &&
+                set.date.month == today.month &&
+                set.date.day == today.day
+            : set.exercise.exerciseKey == widget.exerciseAtIndex.exerciseKey &&
+                set.date.year == today.year &&
+                set.date.month == today.month &&
+                set.date.day == today.day)
         .toList();
     setState(() {
       setsData = exerciseSets;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +100,7 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
                   final set = setsData[index];
                   return Padding(
                       padding:
-                          const EdgeInsets.only(left: 25, right: 25, top: 25),
+                          const EdgeInsets.only(left: 20, right: 20, top: 20),
                       child: Container(
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 234, 232, 237),
@@ -127,7 +126,7 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
                           ],
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(screenWidth * .035),
+                          padding: EdgeInsets.all(screenWidth * .03),
                           child: ListTile(
                             title: Text(
                                 'Weight: ${set.weight} kg, Reps: ${set.reps}',
@@ -140,13 +139,17 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
                                 IconButton(
                                   icon: const Icon(Icons.edit),
                                   onPressed: () {
-                                    editSetDialog(index,set);
+                                    editSetDialog(index, set);
                                   },
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.delete),
                                   onPressed: () {
-                                    deleteSet(index);
+                                    deleteSet(
+                                        context: context,
+                                        index: index,
+                                        loadSets: loadSets(),
+                                        setsData: setsData);
                                     loadSets();
                                   },
                                 ),
@@ -206,8 +209,13 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
                 final reps = repsController.text;
 
                 if (weight.isNotEmpty && reps.isNotEmpty) {
-                  final exerciseSet = SetModel(exercise:widget.exerciseAtIndex ,exerciseId:  widget.exerciseName,exerciseKey: widget.exerciseAtIndex.exerciseKey,
-                   weight:int.parse(weight),reps:  int.parse(reps),date:  today);
+                  final exerciseSet = SetModel(
+                      exercise: widget.exerciseAtIndex,
+                      exerciseId: widget.exerciseName,
+                      exerciseKey: widget.exerciseAtIndex.exerciseKey,
+                      weight: int.parse(weight),
+                      reps: int.parse(reps),
+                      date: today);
                   addSet(exerciseSet);
                   loadSets();
                   Navigator.of(context).pop();
@@ -223,7 +231,7 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
     );
   }
 
-  void editSetDialog(int index,SetModel currentExerciseSet) {
+  void editSetDialog(int index, SetModel currentExerciseSet) {
     weightController.text = setsData[index].weight.toString();
     repsController.text = setsData[index].reps.toString();
 
@@ -262,9 +270,15 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
                 final reps = repsController.text;
 
                 if (weight.isNotEmpty && reps.isNotEmpty) {
-                  final updatedSet =SetModel(exercise: widget.exerciseAtIndex,exerciseId: widget.exerciseName,exerciseKey: widget.exerciseAtIndex.exerciseKey,setKey: currentExerciseSet.setKey,
-                    weight:   int.parse(weight),reps:  int.parse(reps),date:  today);
-                  updateSet(updatedSet.setKey??'', updatedSet);
+                  final updatedSet = SetModel(
+                      exercise: widget.exerciseAtIndex,
+                      exerciseId: widget.exerciseName,
+                      exerciseKey: widget.exerciseAtIndex.exerciseKey,
+                      setKey: currentExerciseSet.setKey,
+                      weight: int.parse(weight),
+                      reps: int.parse(reps),
+                      date: today);
+                  updateSet(updatedSet.setKey ?? '', updatedSet);
                   Navigator.of(context).pop();
                   weightController.clear();
                   repsController.clear();
@@ -272,35 +286,6 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
                 }
               },
               child: const Text('Save'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void deleteSet(int index) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Delete Set?'),
-          content: const Text('Are you sure you want to delete this set?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                final setToDelete = setsData[index];
-                deleteSetByExerciseId(setToDelete.exerciseId, setToDelete.setKey??'', setsData);
-                Navigator.of(context).pop();
-                loadSets();
-              },
-              child: const Text('Delete'),
             ),
           ],
         );

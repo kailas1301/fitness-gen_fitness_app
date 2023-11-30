@@ -1,7 +1,10 @@
 import 'package:fitnessapplication/database/workoutdb/workoutmodel.dart';
+import 'package:fitnessapplication/screens/workout/exercises.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 // Functions for category
+
 
 // to get the categories in a list
 Future<List<CategoryModel>> getCategories() async {
@@ -116,29 +119,26 @@ Future<void> addSet(SetModel value) async {
   setBox.put(key, value);
 }
 
+// to get the sets data to a list
 Future<List<SetModel>> getSets() async {
   final setBox = await Hive.openBox<SetModel>('sets');
   return setBox.values.toList();
 }
 
+// to update the sets using key
 Future<void> updateSet(String key, SetModel updatedSet) async {
   final setBox = await Hive.openBox<SetModel>('sets');
   await setBox.put(key, updatedSet);
 }
 
+// to deleta a set using key
 Future<void> deleteSetByExerciseId(
     String exerciseId, String key, List<SetModel> setsList) async {
   final setBox = await Hive.openBox<SetModel>('sets');
-  // final setToDelete = setsList[index];
-  // final sets =
-  //     setBox.values.where((set) => set.exerciseId == exerciseId).toList();
-  // final setIndex = sets.indexOf(setToDelete);
-  // if (setIndex >= 0) {
-  //   await setBox.deleteAt(setIndex);
-  // }
   await setBox.delete(key);
 }
 
+// get the set for the day
 Future<List<SetModel>> getSetDataForTheDay(DateTime selectedDate) async {
   final setBox = await Hive.openBox<SetModel>('sets');
   final setList = setBox.values
@@ -149,3 +149,50 @@ Future<List<SetModel>> getSetDataForTheDay(DateTime selectedDate) async {
       .toList();
   return setList;
 }
+
+// to delete a set from the database
+
+void deleteSet(
+    {required int index,
+    required List<SetModel> setsData,
+    required BuildContext context,
+    required Future<void> loadSets}) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Delete Set?'),
+        content: const Text('Are you sure you want to delete this set?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              final setToDelete = setsData[index];
+              deleteSetByExerciseId(
+                  setToDelete.exerciseId, setToDelete.setKey ?? '', setsData);
+              Navigator.of(context).pop();
+              loadSets;
+            },
+            child: const Text('Delete'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+// to navigate to new exercise screen
+  void navigateToExercisesScreen(CategoryModel category,BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ExerciseListScreen(
+        category: category,
+      ),
+    ));
+  }
+
+  

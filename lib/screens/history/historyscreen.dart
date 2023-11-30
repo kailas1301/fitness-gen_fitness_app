@@ -1,7 +1,7 @@
 import 'package:fitnessapplication/database/watertracker/watertrackerfunctions.dart';
+import 'package:fitnessapplication/screens/history/functionsforhistoryscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:fitnessapplication/database/workoutdb/workoutmodel.dart';
@@ -29,7 +29,25 @@ class _HistoryScrnState extends State<HistoryScrn> {
     selectedDay = DateTime.now();
     fetchWaterIntakeData(selectedDay!);
     fetchSetdataForTheDay(selectedDay!);
-    groupSetsByExercise();
+    groupSetsByExercise(listOfSetsForTheDay);
+  }
+
+  Future<void> fetchSetdataForTheDay(DateTime selectedDate) async {
+    final setDataOfTheDay = await getSetDataForTheDay(selectedDate);
+    setState(() {
+      listOfSetsForTheDay = setDataOfTheDay;
+    });
+  }
+
+  Future<void> fetchWaterIntakeData(DateTime selectedDate) async {
+    try {
+      final waterIntake = await getWaterIntakeForDate(selectedDate);
+      setState(() {
+        waterIntakeForSelectedDate = waterIntake;
+      });
+    } catch (error) {
+      print('Error fetching water intake data: $error');
+    }
   }
 
   @override
@@ -70,10 +88,10 @@ class _HistoryScrnState extends State<HistoryScrn> {
                   Center(
                     child: Text(
                       "Selected Date: ${selectedDay?.day}-${selectedDay?.month}-${selectedDay?.year}",
-                           style: GoogleFonts.openSans(
-                    fontWeight: FontWeight.w800,
-                    fontSize: screenHeight * .025,
-                  ),
+                      style: GoogleFonts.openSans(
+                        fontWeight: FontWeight.w800,
+                        fontSize: screenHeight * .025,
+                      ),
                     ),
                   ),
                   Container(
@@ -98,18 +116,20 @@ class _HistoryScrnState extends State<HistoryScrn> {
                           children: [
                             Text(
                               "Water Intake",
-                            style: GoogleFonts.openSans(color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: screenHeight * .025,
-                  ),
+                              style: GoogleFonts.openSans(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                                fontSize: screenHeight * .025,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                             Text(
                               "$waterIntakeForSelectedDate glasses",
-                                   style: GoogleFonts.openSans(color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: screenHeight * .025,
-                  ),
+                              style: GoogleFonts.openSans(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                                fontSize: screenHeight * .025,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -133,10 +153,11 @@ class _HistoryScrnState extends State<HistoryScrn> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                String exerciseKey =
-                    groupSetsByExercise().keys.elementAt(index);
+                String exerciseKey = groupSetsByExercise(listOfSetsForTheDay)
+                    .keys
+                    .elementAt(index);
                 List<SetModel> exerciseSets =
-                    groupSetsByExercise()[exerciseKey]!;
+                    groupSetsByExercise(listOfSetsForTheDay)[exerciseKey]!;
                 final exerciseName = exerciseSets.first.exerciseId;
                 final exerciseKeyforGettingName =
                     exerciseSets.first.exercise.exerciseKey.toString();
@@ -236,60 +257,11 @@ class _HistoryScrnState extends State<HistoryScrn> {
                   },
                 );
               },
-              childCount: groupSetsByExercise().length,
+              childCount: groupSetsByExercise(listOfSetsForTheDay).length,
             ),
           ),
         ],
       ),
     );
-  }
-
-  Future<void> fetchSetdataForTheDay(DateTime selectedDate) async {
-    final setDataOfTheDay = await getSetDataForTheDay(selectedDate);
-    setState(() {
-      listOfSetsForTheDay = setDataOfTheDay;
-    });
-  }
-
-  Future<void> fetchWaterIntakeData(DateTime selectedDate) async {
-    try {
-      final waterIntake = await getWaterIntakeForDate(selectedDate);
-      setState(() {
-        waterIntakeForSelectedDate = waterIntake;
-      });
-    } catch (error) {
-      print('Error fetching water intake data: $error');
-    }
-  }
-
-  Future<String> getExerciseName(
-      String? setExerciseKey, String exerciseName) async {
-    final exerciseBox = await Hive.openBox<ExerciseModel>('exercises');
-    try {
-      if (int.parse(setExerciseKey ?? '') > 76) {
-        final exercise = exerciseBox.values.firstWhere(
-          (exercise) => exercise.exerciseKey == setExerciseKey,
-        );
-        final name = exercise.name;
-        return name;
-      } else {
-        return exerciseName;
-      }
-    } catch (error) {
-      print('Error getting exercise name: $error');
-      return '';
-    }
-  }
-
-  Map<String, List<SetModel>> groupSetsByExercise() {
-    Map<String, List<SetModel>> groupedSets = {};
-    for (var set in listOfSetsForTheDay) {
-      String key = set.exerciseKey?.toString() ?? '';
-      if (!groupedSets.containsKey(key)) {
-        groupedSets[key] = [];
-      }
-      groupedSets[key]!.add(set);
-    }
-    return groupedSets;
   }
 }

@@ -1,5 +1,4 @@
 import 'package:fitnessapplication/database/workoutdb/workoutmodel.dart';
-import 'package:fitnessapplication/screens/workout/exercises.dart';
 import 'package:fitnessapplication/screens/workout/functionsforworkout.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,21 +24,18 @@ class _CategoryScrnState extends State<CategoryScrn> {
 //function to load the categories and join the predifined categories and user defined categories
   Future<void> loadCategories() async {
     predefinedCategories = [
-      CategoryModel(name: "CHEST", categoryKey:'1'),
-      CategoryModel(name: "TRICEPS", categoryKey:'2'),
+      CategoryModel(name: "CHEST", categoryKey: '1'),
+      CategoryModel(name: "TRICEPS", categoryKey: '2'),
       CategoryModel(name: "BACK", categoryKey: '3'),
       CategoryModel(name: "BICEPS", categoryKey: '4'),
-      CategoryModel(name: "SHOULDERS", categoryKey:'5'),
+      CategoryModel(name: "SHOULDERS", categoryKey: '5'),
       CategoryModel(name: "LEGS", categoryKey: '6'),
     ];
     // get the categories which are made by user
     final userdefinedcategoryList = await getCategories();
     // saving the predifined and user defined into a single category
     setState(() {
-      categories = [
-        ...userdefinedcategoryList,
-        ...predefinedCategories,
-      ];
+      categories = [...userdefinedcategoryList, ...predefinedCategories];
     });
   }
 
@@ -108,9 +104,8 @@ class _CategoryScrnState extends State<CategoryScrn> {
                     title: Text(
                       category.name.toUpperCase(),
                       style: GoogleFonts.poppins(
-                        fontSize: screenWidth * .045,
-                        fontWeight: FontWeight.w600,
-                      ),
+                          fontSize: screenWidth * .045,
+                          fontWeight: FontWeight.w600),
                     ),
                     trailing: isPredefined
                         ? null
@@ -129,7 +124,8 @@ class _CategoryScrnState extends State<CategoryScrn> {
                                 icon: const Icon(Icons.delete),
                                 onPressed: () {
                                   // to delete a  category
-                                  deleteCategory(category,category.categoryKey??'');
+                                  deleteCategory(
+                                      category, category.categoryKey ?? '');
                                   loadCategories();
                                 },
                               ),
@@ -137,7 +133,7 @@ class _CategoryScrnState extends State<CategoryScrn> {
                           ),
                     onTap: () {
                       // after creating a category when we touch that category we have to go the exercise screen of that category
-                      navigateToExercisesScreen(category);
+                      navigateToExercisesScreen(category, context);
                     },
                   ),
                 ),
@@ -162,9 +158,9 @@ class _CategoryScrnState extends State<CategoryScrn> {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                controller: categoryNameController,
-                decoration: const InputDecoration(labelText: 'Category Name'),
-              ),
+                  controller: categoryNameController,
+                  decoration:
+                      const InputDecoration(labelText: 'Category Name')),
             ],
           ),
           actions: [
@@ -232,7 +228,7 @@ class _CategoryScrnState extends State<CategoryScrn> {
                   // to update the name of category and also the passing the category key .
                   CategoryModel updatedCategory = CategoryModel(
                       name: newName, categoryKey: category.categoryKey);
-                  updateCategory(updatedCategory, index,categoryKey);
+                  updateCategory(updatedCategory, index, categoryKey);
                   loadCategories();
                   Navigator.of(context).pop();
                 }
@@ -243,14 +239,5 @@ class _CategoryScrnState extends State<CategoryScrn> {
         );
       },
     );
-  }
-
-// navigate to exercise screen after pressing a category
-  void navigateToExercisesScreen(CategoryModel category) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ExerciseListScreen(
-        category: category,
-      ),
-    ));
   }
 }

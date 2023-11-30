@@ -111,7 +111,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           SizedBox(height: screenHeight * .02),
                           Text(
                             'Edit Your Profile',
-                                 style: GoogleFonts.openSans(
+                                 style: GoogleFonts.openSans(color: Colors.deepPurple,
                     fontWeight: FontWeight.w800,
                     fontSize: screenHeight * .025,
                   ),

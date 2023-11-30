@@ -31,97 +31,241 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
   Future<void> loadExercises() async {
     Map<String, List<ExerciseModel>> predefinedExercisesMap = {
       "CHEST": [
-        ExerciseModel(name: "Push-Ups", category: widget.category,exerciseKey: '7'),
-        ExerciseModel(name: "Bench Press", category: widget.category,exerciseKey: '8'),
-        ExerciseModel(name: "Chest Fly", category: widget.category,exerciseKey: '9'),
-        ExerciseModel(name: "Incline Bench Press", category: widget.category,exerciseKey: '10'),
-        ExerciseModel(name: "Dumbbell Pullover", category: widget.category,exerciseKey: '11'),
-        ExerciseModel(name: "Cable Crossover", category: widget.category,exerciseKey: '12'),
-        ExerciseModel(name: "Decline Push-Ups", category: widget.category,exerciseKey: '13'),
-        ExerciseModel(name: "Dumbbell Bench Press", category: widget.category,exerciseKey: '14'),
-        ExerciseModel(name: "Machine Chest Press", category: widget.category,exerciseKey: '15'),
-        ExerciseModel(name: "Decline Bench Press", category: widget.category,exerciseKey: '16'),
-        ExerciseModel(name: "Decline Dumbell Press", category: widget.category,exerciseKey: '17'),
+        ExerciseModel(
+            name: "Push-Ups", category: widget.category, exerciseKey: '7'),
+        ExerciseModel(
+            name: "Bench Press", category: widget.category, exerciseKey: '8'),
+        ExerciseModel(
+            name: "Chest Fly", category: widget.category, exerciseKey: '9'),
+        ExerciseModel(
+            name: "Incline Bench Press",
+            category: widget.category,
+            exerciseKey: '10'),
+        ExerciseModel(
+            name: "Dumbbell Pullover",
+            category: widget.category,
+            exerciseKey: '11'),
+        ExerciseModel(
+            name: "Cable Crossover",
+            category: widget.category,
+            exerciseKey: '12'),
+        ExerciseModel(
+            name: "Decline Push-Ups",
+            category: widget.category,
+            exerciseKey: '13'),
+        ExerciseModel(
+            name: "Dumbbell Bench Press",
+            category: widget.category,
+            exerciseKey: '14'),
+        ExerciseModel(
+            name: "Machine Chest Press",
+            category: widget.category,
+            exerciseKey: '15'),
+        ExerciseModel(
+            name: "Decline Bench Press",
+            category: widget.category,
+            exerciseKey: '16'),
+        ExerciseModel(
+            name: "Decline Dumbell Press",
+            category: widget.category,
+            exerciseKey: '17'),
       ],
       "TRICEPS": [
-        ExerciseModel(name: "Tricep Dips", category: widget.category,exerciseKey: '18'),
         ExerciseModel(
-            name: "Overhead Tricep Extension", category: widget.category,exerciseKey: '19'),
-        ExerciseModel(name: "Tricep Kickbacks", category: widget.category,exerciseKey: '20'),
+            name: "Tricep Dips", category: widget.category, exerciseKey: '18'),
         ExerciseModel(
-            name: "Close-Grip Bench Press", category: widget.category,exerciseKey: '21'),
-        ExerciseModel(name: "Skull Crushers", category: widget.category,exerciseKey: '22'),
-        ExerciseModel(name: "Tricep Pushdowns", category: widget.category,exerciseKey: '23'),
-        ExerciseModel(name: "Bench Dips", category: widget.category,exerciseKey: '24'),
-        ExerciseModel(name: "Rope Tricep Pushdown", category: widget.category,exerciseKey: '25'),
+            name: "Overhead Tricep Extension",
+            category: widget.category,
+            exerciseKey: '19'),
+        ExerciseModel(
+            name: "Tricep Kickbacks",
+            category: widget.category,
+            exerciseKey: '20'),
+        ExerciseModel(
+            name: "Close-Grip Bench Press",
+            category: widget.category,
+            exerciseKey: '21'),
+        ExerciseModel(
+            name: "Skull Crushers",
+            category: widget.category,
+            exerciseKey: '22'),
+        ExerciseModel(
+            name: "Tricep Pushdowns",
+            category: widget.category,
+            exerciseKey: '23'),
+        ExerciseModel(
+            name: "Bench Dips", category: widget.category, exerciseKey: '24'),
+        ExerciseModel(
+            name: "Rope Tricep Pushdown",
+            category: widget.category,
+            exerciseKey: '25'),
       ],
       "BACK": [
-        ExerciseModel(name: "Deadlifts", category: widget.category,exerciseKey: '26'),
-        ExerciseModel(name: "Lat Pulldowns", category: widget.category,exerciseKey: '27'),
-        ExerciseModel(name: "Rows (Barbell)", category: widget.category,exerciseKey: '28'),
-        ExerciseModel(name: "Pull-Ups", category: widget.category,exerciseKey: '29'),
-        ExerciseModel(name: "Face Pulls", category: widget.category,exerciseKey: '30'),
-        ExerciseModel(name: "T-Bar Rows", category: widget.category,exerciseKey: '31'),
-        ExerciseModel(name: "Seated Cable Rows", category: widget.category,exerciseKey: '32'),
-        ExerciseModel(name: "Romanian Deadlifts", category: widget.category,exerciseKey: '33'),
-        ExerciseModel(name: "Bent Over Rows", category: widget.category,exerciseKey: '34'),
-        ExerciseModel(name: "Hyperextensions", category: widget.category,exerciseKey: '35'),
+        ExerciseModel(
+            name: "Deadlifts", category: widget.category, exerciseKey: '26'),
+        ExerciseModel(
+            name: "Lat Pulldowns",
+            category: widget.category,
+            exerciseKey: '27'),
+        ExerciseModel(
+            name: "Rows (Barbell)",
+            category: widget.category,
+            exerciseKey: '28'),
+        ExerciseModel(
+            name: "Pull-Ups", category: widget.category, exerciseKey: '29'),
+        ExerciseModel(
+            name: "Face Pulls", category: widget.category, exerciseKey: '30'),
+        ExerciseModel(
+            name: "T-Bar Rows", category: widget.category, exerciseKey: '31'),
+        ExerciseModel(
+            name: "Seated Cable Rows",
+            category: widget.category,
+            exerciseKey: '32'),
+        ExerciseModel(
+            name: "Romanian Deadlifts",
+            category: widget.category,
+            exerciseKey: '33'),
+        ExerciseModel(
+            name: "Bent Over Rows",
+            category: widget.category,
+            exerciseKey: '34'),
+        ExerciseModel(
+            name: "Hyperextensions",
+            category: widget.category,
+            exerciseKey: '35'),
         ExerciseModel(name: "Chin-Ups", category: widget.category),
-        ExerciseModel(name: "One-Arm Dumbbell Rows", category: widget.category,exerciseKey: '36'),
-        ExerciseModel(name: "Wide-Grip Pulldowns", category: widget.category,exerciseKey: '37'),
+        ExerciseModel(
+            name: "One-Arm Dumbbell Rows",
+            category: widget.category,
+            exerciseKey: '36'),
+        ExerciseModel(
+            name: "Wide-Grip Pulldowns",
+            category: widget.category,
+            exerciseKey: '37'),
       ],
       "BICEPS": [
-        ExerciseModel(name: "Bicep Curls (Barbell)", category: widget.category,exerciseKey: '38'),
-        ExerciseModel(name: "Hammer Curls", category: widget.category,exerciseKey: '39'),
-        ExerciseModel(name: "Concentration Curls", category: widget.category,exerciseKey: '40'),
-        ExerciseModel(name: "Preacher Curls", category: widget.category,exerciseKey: '41'),
-        ExerciseModel(name: "Reverse Curls", category: widget.category,exerciseKey: '42'),
-        ExerciseModel(name: "Cable Curl", category: widget.category,exerciseKey: '43'),
-        ExerciseModel(name: "EZ Bar Curls", category: widget.category,exerciseKey: '44'),
-        ExerciseModel(name: "Spider Curls", category: widget.category,exerciseKey: '45'),
         ExerciseModel(
-            name: "Incline Dumbbell Curls", category: widget.category,exerciseKey: '46'),
-        ExerciseModel(name: "Zottman Curls", category: widget.category,exerciseKey: '47'),
-        ExerciseModel(name: "21s", category: widget.category,exerciseKey: '48'),
+            name: "Bicep Curls (Barbell)",
+            category: widget.category,
+            exerciseKey: '38'),
         ExerciseModel(
-            name: "Reverse Grip Barbell Curl", category: widget.category,exerciseKey: '49'),
+            name: "Hammer Curls", category: widget.category, exerciseKey: '39'),
         ExerciseModel(
-            name: "Cross Body Hammer Curl", category: widget.category,exerciseKey: '50'),
+            name: "Concentration Curls",
+            category: widget.category,
+            exerciseKey: '40'),
+        ExerciseModel(
+            name: "Preacher Curls",
+            category: widget.category,
+            exerciseKey: '41'),
+        ExerciseModel(
+            name: "Reverse Curls",
+            category: widget.category,
+            exerciseKey: '42'),
+        ExerciseModel(
+            name: "Cable Curl", category: widget.category, exerciseKey: '43'),
+        ExerciseModel(
+            name: "EZ Bar Curls", category: widget.category, exerciseKey: '44'),
+        ExerciseModel(
+            name: "Spider Curls", category: widget.category, exerciseKey: '45'),
+        ExerciseModel(
+            name: "Incline Dumbbell Curls",
+            category: widget.category,
+            exerciseKey: '46'),
+        ExerciseModel(
+            name: "Zottman Curls",
+            category: widget.category,
+            exerciseKey: '47'),
+        ExerciseModel(
+            name: "21s", category: widget.category, exerciseKey: '48'),
+        ExerciseModel(
+            name: "Reverse Grip Barbell Curl",
+            category: widget.category,
+            exerciseKey: '49'),
+        ExerciseModel(
+            name: "Cross Body Hammer Curl",
+            category: widget.category,
+            exerciseKey: '50'),
       ],
       "SHOULDERS": [
-        ExerciseModel(name: "Arnold Press", category: widget.category,exerciseKey: '51'),
-        ExerciseModel(name: "Lateral Raises", category: widget.category,exerciseKey: '52'),
-        ExerciseModel(name: "Front Raises", category: widget.category,exerciseKey: '53'),
-        ExerciseModel(name: "Shrugs", category: widget.category,exerciseKey: '54'),
-        ExerciseModel(name: "Upright Rows", category: widget.category,exerciseKey: '55'),
-        ExerciseModel(name: "Face Pulls", category: widget.category,exerciseKey: '56'),
-        ExerciseModel(name: "Reverse Flyes", category: widget.category,exerciseKey: '57'),
-        ExerciseModel(name: "Shoulder Taps", category: widget.category,exerciseKey: '58'),
-        ExerciseModel(name: "Cuban Press", category: widget.category,exerciseKey: '59'),
         ExerciseModel(
-            name: "Dumbbell Shoulder Press", category: widget.category,exerciseKey: '60'),
+            name: "Arnold Press", category: widget.category, exerciseKey: '51'),
         ExerciseModel(
-            name: "Seated Dumbbell Lateral Raise", category: widget.category,exerciseKey: '61'),
+            name: "Lateral Raises",
+            category: widget.category,
+            exerciseKey: '52'),
         ExerciseModel(
-            name: "Barbell Shoulder Press", category: widget.category,exerciseKey: '62'),
+            name: "Front Raises", category: widget.category, exerciseKey: '53'),
         ExerciseModel(
-            name: "Machine Shoulder Press", category: widget.category,exerciseKey: '63'),
+            name: "Shrugs", category: widget.category, exerciseKey: '54'),
+        ExerciseModel(
+            name: "Upright Rows", category: widget.category, exerciseKey: '55'),
+        ExerciseModel(
+            name: "Face Pulls", category: widget.category, exerciseKey: '56'),
+        ExerciseModel(
+            name: "Reverse Flyes",
+            category: widget.category,
+            exerciseKey: '57'),
+        ExerciseModel(
+            name: "Shoulder Taps",
+            category: widget.category,
+            exerciseKey: '58'),
+        ExerciseModel(
+            name: "Cuban Press", category: widget.category, exerciseKey: '59'),
+        ExerciseModel(
+            name: "Dumbbell Shoulder Press",
+            category: widget.category,
+            exerciseKey: '60'),
+        ExerciseModel(
+            name: "Seated Dumbbell Lateral Raise",
+            category: widget.category,
+            exerciseKey: '61'),
+        ExerciseModel(
+            name: "Barbell Shoulder Press",
+            category: widget.category,
+            exerciseKey: '62'),
+        ExerciseModel(
+            name: "Machine Shoulder Press",
+            category: widget.category,
+            exerciseKey: '63'),
       ],
       "LEGS": [
-        ExerciseModel(name: "Squats (Back Squats)", category: widget.category,exerciseKey: '64'),
-        ExerciseModel(name: "Lunges", category: widget.category,exerciseKey: '65'),
-        ExerciseModel(name: "Leg Press", category: widget.category,exerciseKey: '66'),
-        ExerciseModel(name: "Deadlifts", category: widget.category,exerciseKey: '67'),
-        ExerciseModel(name: "Calf Raises", category: widget.category,exerciseKey: '68'),
-        ExerciseModel(name: "Leg Extensions", category: widget.category,exerciseKey: '69'),
-        ExerciseModel(name: "Leg Curls", category: widget.category,exerciseKey: '70'),
-        ExerciseModel(name: "Box Jumps", category: widget.category,exerciseKey: '71'),
-        ExerciseModel(name: "Step-Ups", category: widget.category,exerciseKey: '72'),
         ExerciseModel(
-            name: "Bulgarian Split Squats", category: widget.category,exerciseKey: '73'),
-        ExerciseModel(name: "Hack Squats", category: widget.category,exerciseKey: '74'),
-        ExerciseModel(name: "Sumo Deadlifts", category: widget.category,exerciseKey: '75'),
-        ExerciseModel(name: "Walking Lunges", category: widget.category,exerciseKey: '76'),
+            name: "Squats (Back Squats)",
+            category: widget.category,
+            exerciseKey: '64'),
+        ExerciseModel(
+            name: "Lunges", category: widget.category, exerciseKey: '65'),
+        ExerciseModel(
+            name: "Leg Press", category: widget.category, exerciseKey: '66'),
+        ExerciseModel(
+            name: "Deadlifts", category: widget.category, exerciseKey: '67'),
+        ExerciseModel(
+            name: "Calf Raises", category: widget.category, exerciseKey: '68'),
+        ExerciseModel(
+            name: "Leg Extensions",
+            category: widget.category,
+            exerciseKey: '69'),
+        ExerciseModel(
+            name: "Leg Curls", category: widget.category, exerciseKey: '70'),
+        ExerciseModel(
+            name: "Box Jumps", category: widget.category, exerciseKey: '71'),
+        ExerciseModel(
+            name: "Step-Ups", category: widget.category, exerciseKey: '72'),
+        ExerciseModel(
+            name: "Bulgarian Split Squats",
+            category: widget.category,
+            exerciseKey: '73'),
+        ExerciseModel(
+            name: "Hack Squats", category: widget.category, exerciseKey: '74'),
+        ExerciseModel(
+            name: "Sumo Deadlifts",
+            category: widget.category,
+            exerciseKey: '75'),
+        ExerciseModel(
+            name: "Walking Lunges",
+            category: widget.category,
+            exerciseKey: '76'),
       ],
       // Can Add more predefined exercises for each category as needed
     };
@@ -135,7 +279,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
 // to check and put the predifined exercises related to the current category
     final predefinedExercises = predefinedExercisesMap[widget.category.name] ??
         []; // Get predefined exercises for the specific category
-
     setState(() {
       // joining the predefined exercises and the userdefined exercises
       exercises = [...categoryExercises, ...predefinedExercises];
@@ -170,12 +313,11 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
         child: ListView.builder(
           itemCount: exercises.length,
           itemBuilder: (context, index) {
-
             lengthOfList = exercises.length;
             // selecting a exercise which is in the current index
             final exerciseAtIndex = exercises[index];
             // checking the exercise is a predifined exercise or not
-            if (int.parse(exerciseAtIndex.exerciseKey??'')<76) {
+            if (int.parse(exerciseAtIndex.exerciseKey ?? '') < 76) {
               isPredifined = true;
             } else {
               isPredifined = false;
@@ -248,25 +390,30 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                                             },
                                             child: const Text('Cancel'),
                                           ),
-TextButton(
-  onPressed: () {
-    deleteAnExercise(exerciseAtIndex,exerciseAtIndex.exerciseKey??'');
-    loadExercises();
+                                          TextButton(
+                                            onPressed: () {
+                                              deleteAnExercise(
+                                                  exerciseAtIndex,
+                                                  exerciseAtIndex.exerciseKey ??
+                                                      '');
+                                              loadExercises();
 
-    // Navigate to ExerciseListScreen again and clear the stack
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-        builder: (BuildContext context) => ExerciseListScreen(category: widget.category),
-      ),
-      (route) => route.isFirst, // Remove all routes except the first one
-    );
-  },
-  child: const Text('Delete'),
-),
-
-
-
+                                              // Navigate to ExerciseListScreen again and clear the stack
+                                              Navigator.pushAndRemoveUntil(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          ExerciseListScreen(
+                                                              category: widget
+                                                                  .category),
+                                                ),
+                                                (route) => route
+                                                    .isFirst, // Remove all routes except the first one
+                                              );
+                                            },
+                                            child: const Text('Delete'),
+                                          ),
                                         ],
                                       );
                                     },
@@ -381,7 +528,8 @@ TextButton(
                       category: widget.category,
                       categoryKey: widget.category.categoryKey,
                       exerciseKey: currentExercise.exerciseKey);
-                  updateExercise(updatedExercise, index,currentExercise.exerciseKey??'');
+                  updateExercise(updatedExercise, index,
+                      currentExercise.exerciseKey ?? '');
                   loadExercises();
                   Navigator.of(context).pop();
                   editExerciseController.clear();
