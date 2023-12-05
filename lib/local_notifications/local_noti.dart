@@ -7,7 +7,7 @@ class NotificationService {
       FlutterLocalNotificationsPlugin();
   Future<void> initNotification() async {
     AndroidInitializationSettings initializationSettingsAndroid =
-        const AndroidInitializationSettings('flutter_logo');
+        const AndroidInitializationSettings('applogo');
 
     var initializationSettingsIOS = DarwinInitializationSettings(
         requestAlertPermission: true,

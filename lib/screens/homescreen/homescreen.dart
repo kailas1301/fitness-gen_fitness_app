@@ -62,17 +62,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   screenHeight: screenHeight, screenWidth: screenWidth),
               SizedBox(height: screenHeight * .04),
               Center(
-                child: BmiContainer(
-                    height: userHeight!,
-                    weight: userWeight!,
-                    bmiOfUserForDisplay: bmiValue!,
+                child: WarterTrackerContainer(
+                    limitOfGlass: glassLimit!,
                     screenHeight: screenHeight,
                     screenWidth: screenWidth),
               ),
               SizedBox(height: screenHeight * .04),
               Center(
-                child: WarterTrackerContainer(
-                    limitOfGlass: glassLimit!,
+                child: BmiContainer(
+                    height: userHeight!,
+                    weight: userWeight!,
+                    bmiOfUserForDisplay: bmiValue!,
                     screenHeight: screenHeight,
                     screenWidth: screenWidth),
               ),

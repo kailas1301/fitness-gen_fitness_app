@@ -29,9 +29,9 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
 
   @override
   void initState() {
-    super.initState();
     _loadPreviousSteps();
     initPedometer();
+    super.initState();
   }
 
 // to get the previous steps stored in the sharedpreference

@@ -98,8 +98,8 @@ class SetModelAdapter extends TypeAdapter<SetModel> {
     };
     return SetModel(
       exerciseId: fields[0] as String,
-      weight: fields[1] as int,
-      reps: fields[2] as int,
+      weight: fields[1] as String,
+      reps: fields[2] as String,
       date: fields[3] as DateTime,
       exerciseKey: fields[4] as String?,
       setKey: fields[5] as String?,

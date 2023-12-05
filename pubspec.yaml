@@ -59,12 +59,19 @@ dependencies:
   flutter_datetime_picker_plus: ^2.1.0
   shared_preferences: ^2.2.2
   pedometer: ^4.0.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   hive_generator: ^2.0.1
   build_runner: ^2.3.1
+  flutter_launcher_icons: "^0.13.1"
+  
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/applogo.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

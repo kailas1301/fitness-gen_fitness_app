@@ -148,7 +148,7 @@ class _CategoryScrnState extends State<CategoryScrn> {
   //functions
 
 //to show the a showdialougue to add a new category
-  void showCategoryDialog() {
+  Future<void> showCategoryDialog() async {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -193,7 +193,7 @@ class _CategoryScrnState extends State<CategoryScrn> {
   }
 
 // to show  a show dialougue to to edit the category name
-  void editCategory(CategoryModel category, int index) {
+  Future<void> editCategory(CategoryModel category, int index) async {
     // asigning category name to a variable
     String newName = category.name;
     String categoryKey = category.categoryKey.toString();
@@ -241,3 +241,5 @@ class _CategoryScrnState extends State<CategoryScrn> {
     );
   }
 }
+
+

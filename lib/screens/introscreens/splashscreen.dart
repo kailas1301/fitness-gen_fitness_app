@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
         body: Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Column(
+            Column(
         children: [
           SizedBox(
             height: screenHeight * .3,
@@ -42,21 +42,21 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           Text(
             'FIT-GEN',
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.kalam(
               fontSize: screenWidth * 0.10,
               fontWeight: FontWeight.w700,
             ),
           ),
           Text(
             'Transforming Generations',
-            style: GoogleFonts.poppins(
-              fontSize: screenWidth * 0.05,
+            style: GoogleFonts.dancingScript(
+              fontSize: screenWidth * 0.07,
               fontWeight: FontWeight.w700,
             ),
           ),
         ],
-      ),
-    ])));
+            ),
+          ])));
   }
 }
 

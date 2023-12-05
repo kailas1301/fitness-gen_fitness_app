@@ -24,6 +24,7 @@ Future<void> addCategory(CategoryModel value) async {
   await categoryBox.put(key, value);
 }
 
+
 // to dlete a new category
 void deleteCategory(CategoryModel category, String key) {
   // creating a instance of boxes of category exercise and sets
@@ -53,7 +54,6 @@ void deleteCategory(CategoryModel category, String key) {
     exerciseBox.deleteAt(exerciseIndex);
   }
   // Delete the category itself
-  // final index = categoryBox.values.toList().indexOf(category);
   categoryBox.delete(key);
 }
 
@@ -105,7 +105,6 @@ Future<void> deleteAnExercise(ExerciseModel exercise, String key) async {
     final setIndex = setBox.values.toList().indexOf(set);
     setBox.deleteAt(setIndex);
   }
-  // final index = exerciseBox.values.toList().indexOf(exercise);
   exerciseBox.delete(key);
 }
 
@@ -133,12 +132,13 @@ Future<void> updateSet(String key, SetModel updatedSet) async {
 }
 
 // to deleta a set using key
-Future<void> deleteSetByExerciseId( String key, List<SetModel> setsList) async {
+Future<void> deleteSetByExerciseId(
+    String exerciseId, String key, List<SetModel> setsList) async {
   final setBox = await Hive.openBox<SetModel>('sets');
   await setBox.delete(key);
 }
 
-// get the set for the day
+// get setData for the day
 Future<List<SetModel>> getSetDataForTheDay(DateTime selectedDate) async {
   final setBox = await Hive.openBox<SetModel>('sets');
   final setList = setBox.values
@@ -150,60 +150,23 @@ Future<List<SetModel>> getSetDataForTheDay(DateTime selectedDate) async {
   return setList;
 }
 
-// to delete a set from the database
-
-Future<void> deleteSet(
-    {required int index,
-    required List<SetModel> setsData,
-    required BuildContext context,
-   }) async{
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Delete Set?'),
-        content: const Text('Are you sure you want to delete this set?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              final setToDelete = setsData[index];
-              deleteSetByExerciseId(
-                  setToDelete.setKey ?? '', setsData);
-              Navigator.of(context).pop();
-             
-            },
-            child: const Text('Delete'),
-          ),
-        ],
-      );
-    },
-  );
+// navigate to exercise screen after pressing a category
+void navigateToExercisesScreen(CategoryModel category, BuildContext context) {
+  Navigator.of(context).push(MaterialPageRoute(
+    builder: (context) => ExerciseListScreen(
+      category: category,
+    ),
+  ));
 }
 
-// to navigate to new exercise screen
-  void navigateToExercisesScreen(CategoryModel category,BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ExerciseListScreen(
-        category: category,
-      ),
-    ));
-  }
-
-  // to navigate to setEntry screen after touching a exercise ;
-
-  void navigateToSetEntryScreen(
-      String exerciseName, ExerciseModel currentExercise,BuildContext context) {
-    Navigator.push( 
-      context,
-      MaterialPageRoute(
-        builder: (context) => SetEntryScreen(
-            exerciseName: exerciseName, exerciseAtIndex: currentExercise),
-      ),
-    );
-  }
+// navigate to set screen after pressing an exercise
+void navigateToSetEntryScreen(
+    String exerciseName, ExerciseModel currentExercise, BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => SetEntryScreen(
+          exerciseName: exerciseName, exerciseAtIndex: currentExercise),
+    ),
+  );
+}

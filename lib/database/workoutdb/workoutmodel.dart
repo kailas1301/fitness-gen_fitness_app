@@ -33,9 +33,9 @@ class SetModel {
   @HiveField(0)
   String exerciseId;
   @HiveField(1)
-  int weight;
+  String weight;
   @HiveField(2)
-  int reps;
+  String reps;
   @HiveField(3)
   DateTime date;
   @HiveField(4)

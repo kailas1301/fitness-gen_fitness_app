@@ -202,7 +202,7 @@ class _WarterTrackerContainerState extends State<WarterTrackerContainer> {
                     )
                   ],
                 ),
-              ),
+              ),  SizedBox(height: widget.screenHeight * .02),
             ],
           ),
         ),

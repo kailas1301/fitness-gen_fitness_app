@@ -132,11 +132,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
             name: "Hyperextensions",
             category: widget.category,
             exerciseKey: '35'),
-        ExerciseModel(name: "Chin-Ups", category: widget.category),
-        ExerciseModel(
-            name: "One-Arm Dumbbell Rows",
-            category: widget.category,
-            exerciseKey: '36'),
+        ExerciseModel(name: "Chin-Ups", category: widget.category,exerciseKey: '36'),
         ExerciseModel(
             name: "Wide-Grip Pulldowns",
             category: widget.category,
@@ -266,7 +262,6 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
             category: widget.category,
             exerciseKey: '76'),
       ],
-      // Can Add more predefined exercises for each category as needed
     };
 
 // to check if the exercises category key and category category key are equal and putting into a list
@@ -307,16 +302,16 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
                 )),
             backgroundColor: Colors.white,
             elevation: 0,
-          ),        // to show a dialougue box to add new exercises
-        floatingActionButton: Padding(
-          padding: EdgeInsets.only(bottom: screenWidth * .12),
-          child: FloatingActionButton(
-            onPressed: () {
-              showExerciseDialog();
-            },
-            child: const Icon(Icons.add),
+          ), // to show a dialougue box to add new exercises
+          floatingActionButton: Padding(
+            padding: EdgeInsets.only(bottom: screenWidth * .12),
+            child: FloatingActionButton(
+              onPressed: () {
+                showExerciseDialog();
+              },
+              child: const Icon(Icons.add),
+            ),
           ),
-        ),
           body: const Center(child: Text('no exercises created')));
     } else {
       return Scaffold(
@@ -348,7 +343,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
               // selecting a exercise which is in the current index
               final exerciseAtIndex = exercises[index];
               // checking the exercise is a predifined exercise or not
-              if (int.parse(exerciseAtIndex.exerciseKey ?? '') < 76) {
+              if (int.parse(exerciseAtIndex.exerciseKey ?? '') <= 76) {
                 isPredifined = true;
               } else {
                 isPredifined = false;
@@ -574,5 +569,5 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
         );
       },
     );
-  }
+  } // to navigate to setEntry screen after touching a exercise ;
 }

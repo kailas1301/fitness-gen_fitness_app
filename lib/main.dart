@@ -4,11 +4,16 @@ import 'package:fitnessapplication/database/workoutdb/workoutmodel.dart';
 import 'package:fitnessapplication/local_notifications/local_noti.dart';
 import 'package:fitnessapplication/screens/introscreens/splashscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
   NotificationService().initNotification();
   tz.initializeTimeZones();
   await Hive.initFlutter();

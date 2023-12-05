@@ -40,22 +40,21 @@ class StartWorkoutContainer extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8, left: 15, right: 8),
                   child: Text(
                     'START NOW FOR A',
-                    style: GoogleFonts.poppins(
-                      fontSize: screenHeight * .025,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: GoogleFonts.openSans(color: Colors.white,
+                  fontWeight: FontWeight.w800,
+                  fontSize:screenHeight * .025,
+                ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 15, right: 8),
                   child: Text(
                     'BETTER TOMORROW',
-                    style: GoogleFonts.poppins(
-                      fontSize: screenHeight * .025,
-                      fontWeight: FontWeight.bold,
+                    style: GoogleFonts.openSans(
                       color: Colors.white,
-                    ),
+                  fontWeight: FontWeight.w800,
+                  fontSize: screenHeight * .025,
+                ),
                   ),
                 ),
                 SizedBox(height: screenHeight * .02),

@@ -114,12 +114,16 @@ class _BmiContainerState extends State<BmiContainer> {
                     ),
                   ],
                 ),
-                SizedBox(width: widget.screenWidth * .03),
-                SizedBox(
-                  height: widget.screenWidth * .32,
-                  width: widget.screenWidth * .32,
-                  child: Image.asset(
-                      'assets/images/—Pngtree—cartoon character fitness female sports_5426484.png'),
+                SizedBox(width: widget.screenWidth * .02),
+                Column(
+                  children: [SizedBox(height:widget.screenWidth * .08),
+                    SizedBox(
+                      height: widget.screenWidth * .35,
+                      width: widget.screenWidth * .35,
+                      child: Image.asset(
+                          'assets/images/fitgenlogo.png'),
+                    ),
+                  ],
                 )
               ],
             ),

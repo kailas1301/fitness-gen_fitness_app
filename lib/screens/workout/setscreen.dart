@@ -142,17 +142,12 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
                                     editSetDialog(index, set);
                                   },
                                 ),
-                                IconButton(
+                           IconButton(
                                   icon: const Icon(Icons.delete),
-                                 onPressed: () async {
-  await deleteSet(
-    context: context,
-    index: index,
-    setsData: setsData,
-  );
-  await loadSets();
-},
-
+                                  onPressed: () {
+                                    deleteSet(index);
+                                    loadSets();
+                                  },
                                 ),
                               ],
                             ),
@@ -214,8 +209,8 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
                       exercise: widget.exerciseAtIndex,
                       exerciseId: widget.exerciseName,
                       exerciseKey: widget.exerciseAtIndex.exerciseKey,
-                      weight: int.parse(weight),
-                      reps: int.parse(reps),
+                      weight: weight,
+                      reps: reps,
                       date: today);
                   addSet(exerciseSet);
                   loadSets();
@@ -276,8 +271,8 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
                       exerciseId: widget.exerciseName,
                       exerciseKey: widget.exerciseAtIndex.exerciseKey,
                       setKey: currentExerciseSet.setKey,
-                      weight: int.parse(weight),
-                      reps: int.parse(reps),
+                      weight: weight,
+                      reps: reps,
                       date: today);
                   updateSet(updatedSet.setKey ?? '', updatedSet);
                   Navigator.of(context).pop();
@@ -287,6 +282,36 @@ class _SetEntryScreenState extends State<SetEntryScreen> {
                 }
               },
               child: const Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void deleteSet(int index) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete Set?'),
+          content: const Text('Are you sure you want to delete this set?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+             onPressed: () {
+                final setToDelete = setsData[index];
+                deleteSetByExerciseId(
+                    setToDelete.exerciseId, setToDelete.setKey ?? '', setsData);
+                Navigator.of(context).pop();
+                loadSets();
+              },
+              child: const Text('Delete'),
             ),
           ],
         );
