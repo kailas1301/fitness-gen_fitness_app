@@ -63,7 +63,7 @@ class _StepTrackerScrnState extends State<StepTrackerScrn> {
   }
   void onStepCountError(error) {
     setState(() {
-      steps = 'Step Count not available';
+      steps = '0';
     });
   }
 

@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:fitnessapplication/database/userinformation/dbfunctions.dart';
 import 'package:fitnessapplication/database/userinformation/userdata.dart';
 import 'package:fitnessapplication/database/watertracker/watertrackerfunctions.dart';
-import 'package:fitnessapplication/screens/introscreens/personalinformations.dart';
 import 'package:fitnessapplication/widgets/textformfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
