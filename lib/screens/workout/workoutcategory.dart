@@ -145,6 +145,7 @@ class _CategoryScrnState extends State<CategoryScrn> {
     );
   }
 
+  
   //functions
 
 //to show the a showdialougue to add a new category
@@ -197,7 +198,6 @@ class _CategoryScrnState extends State<CategoryScrn> {
     // asigning category name to a variable
     String newName = category.name;
     String categoryKey = category.categoryKey.toString();
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
